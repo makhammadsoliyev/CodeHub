@@ -2,7 +2,7 @@
 
 namespace CodeHub.DataAccess.Repositories;
 
-public interface IRepository<TEntity> where TEntity : Auditable
+public interface IGenericRepository<TEntity> where TEntity : Auditable
 {
     Task<TEntity> InsertAsync(TEntity entity);  
     Task<TEntity> UpdateAsync(TEntity entity);

@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeHub.DataAccess.Repositories;
 
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditable
+public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : Auditable
 {
     private readonly AppDbContext dbContext;
     private readonly DbSet<TEntity> dbSet;
 
-    public Repository(AppDbContext dbContext)
+    public GenericRepository(AppDbContext dbContext)
     {
         this.dbContext = dbContext;
         this.dbSet = dbContext.Set<TEntity>();
