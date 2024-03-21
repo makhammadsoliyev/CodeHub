@@ -10,6 +10,6 @@ public class RepositoryUpdateModel
     public RepositoryVisibility Visibility { get; set; }
     public long? ReadmeId { get; set; }
     public long? GitIgnoreId { get; set; }
-    public long? LicenceId { get; set; }
+    public long? LicenseId { get; set; }
     public long? ParentId { get; set; }
 }
