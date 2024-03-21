@@ -8,8 +8,8 @@ public class Issue : Auditable
     public string Title { get; set; }
     public string Description { get; set; }
     public IssueStatus Status { get; set; }
-    public long RepositoryID { get; set; }
+    public long RepositoryId { get; set; }
     public Repository Repository { get; set; }
-    public long CreatorID { get; set; }
-    public User User { get; set; }
+    public long CreatorId { get; set; }
+    public User Creator { get; set; }
 }

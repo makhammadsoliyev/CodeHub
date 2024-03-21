@@ -1,4 +1,4 @@
-﻿namespace CodeHub.Model.IssueModels;
+﻿namespace CodeHub.Model.Issues;
 
 public class IssueUpdateModel
 {

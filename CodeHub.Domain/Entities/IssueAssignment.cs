@@ -4,8 +4,8 @@ namespace CodeHub.Domain.Entities;
 
 public class IssueAssignment : Auditable
 {
-    public long IssueID { get; set; }
+    public long IssueId { get; set; }
     public Issue Issue { get; set; }
-    public long AssignessID { get; set; }
-    public User AssignedUser { get; set; }
+    public long AssignessId { get; set; }
+    public User Assigness { get; set; }
 }

@@ -1,8 +1,6 @@
-﻿using CodeHub.Domain.Commons;
+﻿namespace CodeHub.Model.Users;
 
-namespace CodeHub.Domain.Entities;
-
-public class User : Auditable
+public class UserCreateModel
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
