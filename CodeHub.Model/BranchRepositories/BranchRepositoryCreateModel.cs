@@ -7,5 +7,5 @@ public class BranchRepositoryCreateModel
     public long RepositoryId { get; set; }
     public long? ReadmeId { get; set; }
     public long? GitIgnoreId { get; set; }
-    public long? LicenceId { get; set; }
+    public long? LicenseId { get; set; }
 }
