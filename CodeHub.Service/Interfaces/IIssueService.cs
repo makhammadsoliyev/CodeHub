@@ -1,7 +1,5 @@
 ﻿using CodeHub.Model.Issues;
-
 namespace CodeHub.Service.Interfaces;
-
 public interface IIssueService
 {
     Task<IssueViewModel> CreateAsync(IssueCreateModel issue);
