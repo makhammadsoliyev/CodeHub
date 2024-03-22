@@ -1,12 +1,13 @@
-﻿using CodeHub.Model.Issues;
+﻿using CodeHub.Model.IssueAssignments;
+using CodeHub.Model.Issues;
 
 namespace CodeHub.Service.Interfaces;
 
 public interface IIssueAssignmentService
 {
-    Task<IssueViewModel> CreateAsync(IssueCreateModel issue);
-    Task<IssueViewModel> UpdateAsync(long id, IssueUpdateModel issue);
+    Task<IssueAssignmentViewModel> CreateAsync(IssueAssignmentCreateModel issue);
+    Task<IssueAssignmentViewModel> UpdateAsync(long id, IssueAssignmentUpdateModel issue);
     Task<bool> DeleteAsync(long id);
-    Task<IssueViewModel> GetById(long id);
-    Task<IEnumerable<IssueViewModel>> GetAllAsync();
+    Task<IssueAssignmentViewModel> GetById(long id);
+    Task<IEnumerable<IssueAssignmentViewModel>> GetAllAsync();
 }
