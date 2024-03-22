@@ -57,8 +57,8 @@ public class IssueService : IIssueService
     public async Task<IEnumerable<IssueViewModel>> GetAllAsync()
     {
         var issues = await repository
-          .SelectAsQueryable(
-            new string[] { "Repository", "User" }).ToListAsync();
+          .SelectAsQueryable(new string[] { "Repository", "User" })
+          .ToListAsync();
 
         return mapper.Map<IEnumerable<IssueViewModel>>(issues);
     }
