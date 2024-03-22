@@ -20,4 +20,6 @@ public class Repository : Auditable
     public License License { get; set; }
     public long? ParentRepositoryId { get; set; }
     public Repository ParentRepository { get; set; }
+    IEnumerable<BranchRepository> BranchRepositories { get; set; }
+    IEnumerable<Issue> Issues { get; set; }
 }

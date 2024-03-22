@@ -10,4 +10,5 @@ public class User : Auditable
     public string Email { get; set; }
     public string Password { get; set; }
     public string AvatarUrl { get; set; }
+    IEnumerable<Repository> Repositories { get; set; }
 }
