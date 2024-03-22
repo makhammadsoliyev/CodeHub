@@ -26,10 +26,10 @@ public class FollowService : IFollowService
         if (follow.FollowerId == follow.FollowingId)
             throw new CustomException(400, "You can't follow yourself");
 
-        var existFollower = await repository.SelectByIdAsync(follow.FollowerId)
+        var existFollower = await userService.GetByIdAsync(follow.FollowerId)
             ?? throw new CustomException(404, "User not found");
 
-        var existFollowing = await repository.SelectByIdAsync(follow.FollowingId)
+        var existFollowing = await userService.GetByIdAsync(follow.FollowingId)
             ?? throw new CustomException(404, "User not found");
 
         var existFollow = repository
