@@ -9,6 +9,6 @@ public interface IGenericRepository<TEntity> where TEntity : Auditable
     Task<bool> DeleteAsync(TEntity entity);
     Task<TEntity> SelectByIdAsync(long id, string[] includes = null);
     IEnumerable<TEntity> SelectAsEnumerableAsync(string[] includes = null);
-    IQueryable<TEntity> SelectAsQueryableAsync(string[] includes = null);
+    IQueryable<TEntity> SelectAsQueryable(string[] includes = null);
     Task SaveAsync();
 }
