@@ -11,6 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\CodeHub.DataAccess\CodeHub.DataAccess.csproj" />
 	  <ProjectReference Include="..\CodeHub.Domain\CodeHub.Domain.csproj" />
 	  <ProjectReference Include="..\CodeHub.Model\CodeHub.Model.csproj" />
 	</ItemGroup>
