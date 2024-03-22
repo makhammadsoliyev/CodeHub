@@ -12,16 +12,20 @@ public class RepositoryService : IRepositoryService
 {
     private IMapper mapper;
     private IGenericRepository<Repository> repository;
+    private IUserService userService;
 
 
-    public RepositoryService(IMapper mapper, IGenericRepository<Repository> genericRepository)
+    public RepositoryService(IMapper mapper, IGenericRepository<Repository> genericRepository, IUserService userService)
     {
         this.mapper = mapper;
         this.repository = genericRepository;
+        this.userService = userService;
     }
 
     public async Task<RepositoryViewModel> CreateAsync(RepositoryCreateModel repositoryModel)
     {
+        var existUser = await userService.GetByIdAsync(repositoryModel.UserId);
+
         var existRepository = repository
             .SelectAsQueryableAsync()
             .Where(r => r.UserId == repositoryModel.UserId)
@@ -70,6 +74,8 @@ public class RepositoryService : IRepositoryService
 
     public async Task<RepositoryViewModel> UpdateAsync(long id, RepositoryUpdateModel repositoryModel)
     {
+        var existUser = await userService.GetByIdAsync(repositoryModel.UserId);
+
         var existRepository = await repository.SelectByIdAsync(id)
             ?? throw new CustomException(404, "Not found");
 
