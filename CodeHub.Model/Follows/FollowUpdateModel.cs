@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeHub.Model.Follow;
 
-public class FollowCreateModel
+public class FollowUpdateModel
 {
     public long FollowerId { get; set; }
     public long FollowingId { get; set; }
