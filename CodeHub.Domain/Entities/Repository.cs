@@ -13,7 +13,7 @@ public class Repository : Auditable
     public User User { get; set; }
     public RepositoryVisibility Visibility { get; set; }
     public long? ReadmeId { get; set; }
-    public ReadmeModel Readme { get; set; }
+    public Readme Readme { get; set; }
     public long? GitIgnoreId { get; set; }
     public GitIgnore GitIgnore { get; set; }
     public long? LicenseId { get; set; }

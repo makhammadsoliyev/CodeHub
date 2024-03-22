@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeHub.Model.Readmes;
+namespace CodeHub.Model.Readme;
 
 public class ReadmeViewModel
 {

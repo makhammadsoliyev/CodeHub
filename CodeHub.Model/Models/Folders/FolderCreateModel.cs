@@ -1,10 +1,8 @@
-﻿namespace CodeHub.Model.Folders;
+﻿namespace CodeHub.Model.Models.Folders;
 
-public class FolderUpdateModel
+public class FolderCreateModel
 {
-    public long Id { get; set; }
     public string Name { get; set; }
     public long ParentId { get; set; }
     public long RepositoryId { get; set; }
-
 }

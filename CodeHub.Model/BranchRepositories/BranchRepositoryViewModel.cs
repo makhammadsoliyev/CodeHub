@@ -10,7 +10,7 @@ public class BranchRepositoryViewModel
     public User User { get; set; }
     public long RepositoryId { get; set; }
     public Repository Repository { get; set; }
-    public ReadmeModel Readme { get; set; }
+    public Readme Readme { get; set; }
     public GitIgnore GitIgnore { get; set; }
     public License License { get; set; }
 }
