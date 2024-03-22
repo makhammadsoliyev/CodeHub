@@ -45,7 +45,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         return query;
     }
 
-    public IQueryable<TEntity> SelectAsQueryableAsync(string[] includes = null)
+    public IQueryable<TEntity> SelectAsQueryable(string[] includes = null)
     {
         var query = dbSet;
 
