@@ -11,16 +11,23 @@ public class IssueService : IIssueService
 {
     private readonly IMapper mapper;
     private readonly IGenericRepository<Issue> repository;
+    private IRepositoryService repositoryService;
+    private IUserService userService;
 
 
-    public IssueService(IMapper mapper, IGenericRepository<Issue> repository)
+    public IssueService(IMapper mapper, IGenericRepository<Issue> repository, IRepositoryService repositoryService, IUserService userService)
     {
         this.mapper = mapper;
         this.repository = repository;
+        this.repositoryService = repositoryService;
+        this.userService = userService;
     }
 
     public async Task<IssueViewModel> CreateAsync(IssueCreateModel issue)
     {
+        var existUser = await userService.GetByIdAsync(issue.UserId);
+        var existRepository = await repositoryService.GetByIdAsync(issue.RepositoryId);
+
         var existIssue = await repository
             .SelectAsQueryableAsync()
             .Where(r => r.CreatorId == issue.UserId)
@@ -68,6 +75,9 @@ public class IssueService : IIssueService
 
     public async Task<IssueViewModel> UpdateAsync(long id, IssueUpdateModel issue)
     {
+        var existUser = await userService.GetByIdAsync(issue.UserId);
+        var existRepository = await repositoryService.GetByIdAsync(issue.RepositoryId);
+
         var existIssue = await repository.SelectByIdAsync(id)
            ?? throw new CustomException(404, "Issue not found");
 
