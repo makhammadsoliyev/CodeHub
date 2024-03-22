@@ -11,10 +11,10 @@ namespace CodeHub.Service.Services;
 public class RepositoryService : IRepositoryService
 {
     private IMapper mapper;
-    private GenericRepository<Repository> repository;
+    private IGenericRepository<Repository> repository;
 
 
-    public RepositoryService(IMapper mapper, GenericRepository<Repository> genericRepository)
+    public RepositoryService(IMapper mapper, IGenericRepository<Repository> genericRepository)
     {
         this.mapper = mapper;
         this.repository = genericRepository;
@@ -30,8 +30,8 @@ public class RepositoryService : IRepositoryService
         if (existRepository is not null)
             throw new CustomException(409, "Repository is already exist");
 
-        var createdRepository = await this.repository.InsertAsync(mapper.Map<Repository>(Repository));
-        await this.repository.SaveAsync();
+        var createdRepository = await repository.InsertAsync(mapper.Map<Repository>(Repository));
+        await repository.SaveAsync();
 
         return mapper.Map<RepositoryViewModel>(createdRepository);
     }
@@ -68,14 +68,14 @@ public class RepositoryService : IRepositoryService
     }
 
 
-    public async Task<RepositoryViewModel> UpdateAsync(long id, RepositoryUpdateModel repository)
+    public async Task<RepositoryViewModel> UpdateAsync(long id, RepositoryUpdateModel Repository)
     {
-        var existRepository = await this.repository.SelectByIdAsync(id)
+        var existRepository = await repository.SelectByIdAsync(id)
             ?? throw new CustomException(404, "Not found");
 
         var mappedRepository = mapper.Map<Repository>(repository);
-        var updateRepository = await this.repository.UpdateAsync(mappedRepository);
-        await this.repository.SaveAsync();
+        var updateRepository = await repository.UpdateAsync(mappedRepository);
+        await repository.SaveAsync();
 
         return mapper.Map<RepositoryViewModel>(mappedRepository);
     }
