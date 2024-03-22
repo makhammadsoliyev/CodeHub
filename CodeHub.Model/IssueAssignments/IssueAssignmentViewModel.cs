@@ -6,5 +6,5 @@ public class IssueAssignmentViewModel
 {
     public long Id { get; set; }
     public Issue Issue { get; set; }
-    public User Assigness { get; set; }
+    public User Assignees { get; set; }
 }

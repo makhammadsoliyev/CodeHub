@@ -27,7 +27,7 @@ public class RepositoryService : IRepositoryService
         var existUser = await userService.GetByIdAsync(repositoryModel.UserId);
 
         var existRepository = repository
-            .SelectAsQueryableAsync()
+            .SelectAsQueryable()
             .Where(r => r.UserId == repositoryModel.UserId)
             .FirstOrDefault(r => r.Name == repositoryModel.Name);
 
@@ -56,8 +56,7 @@ public class RepositoryService : IRepositoryService
     public async Task<IEnumerable<RepositoryViewModel>> GetAllAsync()
     {
         var Repositories = await repository
-            .SelectAsQueryableAsync
-            (new string[] { "Readme", "GitIgnore", "License", "Parent" }).ToListAsync();
+            .SelectAsQueryable(new string[] { "Readme", "GitIgnore", "License", "Parent" }).ToListAsync();
 
         return mapper.Map<IEnumerable<RepositoryViewModel>>(Repositories);
     }
@@ -70,7 +69,6 @@ public class RepositoryService : IRepositoryService
 
         return mapper.Map<RepositoryViewModel>(existRepository);
     }
-
 
     public async Task<RepositoryViewModel> UpdateAsync(long id, RepositoryUpdateModel repositoryModel)
     {

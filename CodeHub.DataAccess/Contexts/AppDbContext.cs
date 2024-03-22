@@ -1,14 +1,16 @@
 ﻿using CodeHub.Domain.Commons;
+using CodeHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeHub.DataAccess.Contexts;
 
 public class AppDbContext : DbContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public DbSet<User> Users { get; set; }
+    public DbSet<Repository> Repositories { get; set; }
+
+    public AppDbContext(DbContextOptions options) : base(options)
     {
-        var connectionString = "Host=raja.db.elephantsql.com; Database=xuqrbloy; Username=xuqrbloy; Password=2rrItqHcos3DLvq5LiCGq4slFbqMXKdk";
-        optionsBuilder.UseNpgsql(connectionString);
     }
 
     public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
