@@ -56,7 +56,8 @@ public class RepositoryService : IRepositoryService
     public async Task<IEnumerable<RepositoryViewModel>> GetAllAsync()
     {
         var Repositories = await repository
-            .SelectAsQueryable(new string[] { "Readme", "GitIgnore", "License", "Parent" }).ToListAsync();
+            .SelectAsQueryable(new string[] { "Readme", "GitIgnore", "License", "Parent" })
+            .ToListAsync();
 
         return mapper.Map<IEnumerable<RepositoryViewModel>>(Repositories);
     }
