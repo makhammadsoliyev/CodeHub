@@ -10,67 +10,72 @@ namespace CodeHub.Service.Services;
 
 public class RepositoryService : IRepositoryService
 {
-
     private IMapper mapper;
-    private GenericRepository<Repository> Repository;
+    private GenericRepository<Repository> repository;
+
+
     public RepositoryService(IMapper mapper, GenericRepository<Repository> genericRepository)
     {
         this.mapper = mapper;
-        this.Repository = genericRepository;
+        this.repository = genericRepository;
     }
 
-    public async Task<RepositoryViewModel> CreateAsync(RepositoryCreateModel repository)
+    public async Task<RepositoryViewModel> CreateAsync(RepositoryCreateModel Repository)
     {
-        var existRepository = Repository
+        var existRepository = repository
             .SelectAsQueryableAsync()
-            .Where
-            (r => r.UserId == repository.UserId)
-            .FirstOrDefault
-            (r => r.Name == repository.Name);
+            .Where(r => r.UserId == Repository.UserId)
+            .FirstOrDefault(r => r.Name == Repository.Name);
 
         if (existRepository is not null)
             throw new CustomException(409, "Repository is already exist");
 
-        var createdUser = await Repository.InsertAsync(mapper.Map<Repository>(repository));
-        await Repository.UpdateAsync(createdUser);
+        var createdRepository = await this.repository.InsertAsync(mapper.Map<Repository>(Repository));
+        await this.repository.SaveAsync();
 
-        return mapper.Map<RepositoryViewModel>(createdUser);
+        return mapper.Map<RepositoryViewModel>(createdRepository);
     }
+
+
     public async Task<bool> DeleteAsync(long id)
     {
-        var existRepository = await Repository.SelectByIdAsync(id)
+        var existRepository = await repository.SelectByIdAsync(id)
             ?? throw new CustomException(404, "Not found");
 
-        await Repository.DeleteAsync(existRepository);
-        await Repository.SaveAsync();
+        await repository.DeleteAsync(existRepository);
+        await repository.SaveAsync();
 
         return true;
     }
+
+
     public async Task<IEnumerable<RepositoryViewModel>> GetAllAsync()
     {
-        var Repositories = await Repository
+        var Repositories = await repository
             .SelectAsQueryableAsync
-            (
-                new string[] { "Readme", "GitIgnore", "License", "Parent" }).ToListAsync();
-
+            (new string[] { "Readme", "GitIgnore", "License", "Parent" }).ToListAsync();
 
         return mapper.Map<IEnumerable<RepositoryViewModel>>(Repositories);
     }
+
+
     public async Task<RepositoryViewModel> GetByIdAsync(long id)
     {
-        var existRepository = await Repository.SelectByIdAsync(id, new string[] { "Readme", "GitIgnore", "License", "Parent" })
+        var existRepository = await repository.SelectByIdAsync(id, new string[] { "Readme", "GitIgnore", "License", "Parent" })
             ?? throw new CustomException(404, "Repository is not found");
 
         return mapper.Map<RepositoryViewModel>(existRepository);
     }
+
+
     public async Task<RepositoryViewModel> UpdateAsync(long id, RepositoryUpdateModel repository)
     {
-        var existRepository = await Repository.SelectByIdAsync(id)
+        var existRepository = await this.repository.SelectByIdAsync(id)
             ?? throw new CustomException(404, "Not found");
 
         var mappedRepository = mapper.Map<Repository>(repository);
-        var updateRepository = await Repository.UpdateAsync(mappedRepository);
-        await Repository.SaveAsync();
+        var updateRepository = await this.repository.UpdateAsync(mappedRepository);
+        await this.repository.SaveAsync();
 
         return mapper.Map<RepositoryViewModel>(mappedRepository);
     }
