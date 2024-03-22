@@ -25,7 +25,7 @@ public class UserService : IUserService
         var existUser = repository
             .SelectAsQueryable()
             .FirstOrDefault
-            (u => u.Email == user.Email || u.UserName == user.UserName);
+            (u => u.Email.ToLower() == user.Email.ToLower() || u.UserName.ToLower() == user.UserName.ToLower());
 
         if (existUser is not null)
             throw new CustomException(409, "User already exist");

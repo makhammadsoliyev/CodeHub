@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeHub.Model.Readme;
+namespace CodeHub.Model.Readmes;
 
 public class ReadmeUpdateModel
 {
+    public long Id { get; set; }
     public string Name { get; set; }
     public string Content { get; set; }
 }
