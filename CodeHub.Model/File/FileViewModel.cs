@@ -1,7 +1,8 @@
 ﻿using CodeHub.Domain.Entities;
-using CodeHub.Model.Models.Folders;
+using CodeHub.Model.Folders;
+using CodeHub.Model.Repositories;
 
-namespace CodeHub.Model.Models.File;
+namespace CodeHub.Model.File;
 
 public class FileViewModel
 {
