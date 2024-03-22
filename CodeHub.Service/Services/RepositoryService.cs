@@ -11,15 +11,15 @@ namespace CodeHub.Service.Services;
 public class RepositoryService : IRepositoryService
 {
     private IMapper mapper;
-    private IGenericRepository<Repository> repository;
     private IUserService userService;
+    private IGenericRepository<Repository> repository;
 
 
     public RepositoryService(IMapper mapper, IGenericRepository<Repository> genericRepository, IUserService userService)
     {
         this.mapper = mapper;
-        this.repository = genericRepository;
         this.userService = userService;
+        this.repository = genericRepository;
     }
 
     public async Task<RepositoryViewModel> CreateAsync(RepositoryCreateModel repositoryModel)
@@ -56,8 +56,7 @@ public class RepositoryService : IRepositoryService
     public async Task<IEnumerable<RepositoryViewModel>> GetAllAsync()
     {
         var Repositories = await repository
-            .SelectAsQueryable
-            (new string[] { "Readme", "GitIgnore", "License", "Parent" }).ToListAsync();
+            .SelectAsQueryable(new string[] { "Readme", "GitIgnore", "License", "Parent" }).ToListAsync();
 
         return mapper.Map<IEnumerable<RepositoryViewModel>>(Repositories);
     }
