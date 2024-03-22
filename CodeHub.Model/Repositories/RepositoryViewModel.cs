@@ -11,7 +11,7 @@ public class RepositoryViewModel
     public string BranchName { get; set; }
     public long UserId { get; set; }
     public RepositoryVisibility Visibility { get; set; }
-    public ReadmeModel Readme { get; set; }
+    public Readme Readme { get; set; }
     public GitIgnore GitIgnore { get; set; }
     public License License { get; set; }
     public Repository Parent { get; set; }

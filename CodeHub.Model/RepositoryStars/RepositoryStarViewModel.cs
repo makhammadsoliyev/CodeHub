@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeHub.Model.RepositoryStars;
+namespace CodeHub.Model.RepositoryStar;
 
 public class RepositoryStarViewModel
 {

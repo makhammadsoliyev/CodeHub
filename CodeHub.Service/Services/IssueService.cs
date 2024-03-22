@@ -29,7 +29,7 @@ public class IssueService : IIssueService
         var existRepository = await repositoryService.GetByIdAsync(issue.RepositoryId);
 
         var existIssue = await repository
-            .SelectAsQueryable()
+            .SelectAsQueryableAsync()
             .Where(r => r.CreatorId == issue.UserId)
             .FirstOrDefaultAsync(r => r.Title == issue.Title);
 
@@ -57,7 +57,7 @@ public class IssueService : IIssueService
     public async Task<IEnumerable<IssueViewModel>> GetAllAsync()
     {
         var issues = await repository
-          .SelectAsQueryable(
+          .SelectAsQueryableAsync(
             new string[] { "Repository", "User" }).ToListAsync();
 
         return mapper.Map<IEnumerable<IssueViewModel>>(issues);
