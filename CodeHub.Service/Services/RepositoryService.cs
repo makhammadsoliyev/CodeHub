@@ -20,17 +20,17 @@ public class RepositoryService : IRepositoryService
         this.repository = genericRepository;
     }
 
-    public async Task<RepositoryViewModel> CreateAsync(RepositoryCreateModel Repository)
+    public async Task<RepositoryViewModel> CreateAsync(RepositoryCreateModel repositoryModel)
     {
         var existRepository = repository
             .SelectAsQueryableAsync()
-            .Where(r => r.UserId == Repository.UserId)
-            .FirstOrDefault(r => r.Name == Repository.Name);
+            .Where(r => r.UserId == repositoryModel.UserId)
+            .FirstOrDefault(r => r.Name == repositoryModel.Name);
 
         if (existRepository is not null)
             throw new CustomException(409, "Repository is already exist");
 
-        var createdRepository = await repository.InsertAsync(mapper.Map<Repository>(Repository));
+        var createdRepository = await repository.InsertAsync(mapper.Map<Repository>(repositoryModel));
         await repository.SaveAsync();
 
         return mapper.Map<RepositoryViewModel>(createdRepository);
@@ -68,12 +68,12 @@ public class RepositoryService : IRepositoryService
     }
 
 
-    public async Task<RepositoryViewModel> UpdateAsync(long id, RepositoryUpdateModel Repository)
+    public async Task<RepositoryViewModel> UpdateAsync(long id, RepositoryUpdateModel repositoryModel)
     {
         var existRepository = await repository.SelectByIdAsync(id)
             ?? throw new CustomException(404, "Not found");
 
-        var mappedRepository = mapper.Map<Repository>(repository);
+        var mappedRepository = mapper.Map(repositoryModel, existRepository);
         var updateRepository = await repository.UpdateAsync(mappedRepository);
         await repository.SaveAsync();
 
