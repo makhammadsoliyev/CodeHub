@@ -28,14 +28,7 @@ public class IssueService : IIssueService
         var existUser = await userService.GetByIdAsync(issue.UserId);
         var existRepository = await repositoryService.GetByIdAsync(issue.RepositoryId);
 
-        var existIssue = await repository
-            .SelectAsQueryable()
-            .Where(r => r.CreatorId == issue.UserId)
-            .FirstOrDefaultAsync(r => r.Title == issue.Title);
-
-        if (existIssue is not null)
-            throw new CustomException(409, "Issue is already exist with this title");
-        var createdIssue = await repository.InsertAsync(existIssue);
+        var createdIssue = await repository.InsertAsync(mapper.Map<Issue>(issue));
         await repository.SaveAsync();
 
         return mapper.Map<IssueViewModel>(createdIssue);
@@ -64,7 +57,7 @@ public class IssueService : IIssueService
     }
 
 
-    public async Task<IssueViewModel> GetByAsync(long id)
+    public async Task<IssueViewModel> GetByIdAsync(long id)
     {
         var existIssue = await repository.SelectByIdAsync(id, new string[] { "Repositories" })
             ?? throw new CustomException(404, "Issue not found");
