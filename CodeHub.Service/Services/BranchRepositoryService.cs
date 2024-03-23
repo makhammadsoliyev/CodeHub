@@ -31,7 +31,7 @@ public class BranchRepositoryService : IBranchRepositoryService
         var existRepository = await repositoryService.GetByIdAsync(branchRepository.RepositoryId);
 
         var existBranchRepository = Repository
-            .SelectAsQueryableAsync()
+            .SelectAsQueryable()
             .Where(br => br.RepositoryId == branchRepository.RepositoryId)
             .FirstOrDefault(br => br.BranchName == branchRepository.BranchName);
 
@@ -59,10 +59,11 @@ public class BranchRepositoryService : IBranchRepositoryService
 
     public async Task<IEnumerable<BranchRepositoryViewModel>> GetAllAsync()
     {
-        var existBranchRepositores = await Repository
-            .SelectAsQueryableAsync(new string[] { "User", "Repository", "Readme", "GitIgnore", "License" }).ToListAsync();
+        var existBranchRepositories = await Repository
+            .SelectAsQueryable(new string[] { "User", "Repository", "Readme", "GitIgnore", "License" })
+            .ToListAsync();
 
-        return mapper.Map<IEnumerable<BranchRepositoryViewModel>>(existBranchRepositores);
+        return mapper.Map<IEnumerable<BranchRepositoryViewModel>>(existBranchRepositories);
     }
 
 
