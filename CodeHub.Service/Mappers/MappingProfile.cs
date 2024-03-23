@@ -2,15 +2,13 @@
 using CodeHub.Domain.Entities;
 using CodeHub.Model.BranchRepositories;
 using CodeHub.Model.Commits;
-using CodeHub.Model.File;
+using CodeHub.Model.Files;
 using CodeHub.Model.Folders;
 using CodeHub.Model.Follow;
-using CodeHub.Model.GitIgnore;
 using CodeHub.Model.GitIgnores;
 using CodeHub.Model.IssueAssignments;
 using CodeHub.Model.Issues;
 using CodeHub.Model.Licenses;
-using CodeHub.Model.Readme;
 using CodeHub.Model.Readmes;
 using CodeHub.Model.Repositories;
 using CodeHub.Model.RepositoryStar;

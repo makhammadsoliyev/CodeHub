@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CodeHub.DataAccess.Repositories;
 using CodeHub.Domain.Entities;
-using CodeHub.Model.GitIgnore;
+using CodeHub.Model.GitIgnores;
 using CodeHub.Service.Exceptions;
 using CodeHub.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;

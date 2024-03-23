@@ -2,7 +2,7 @@
 using CodeHub.Model.Folders;
 using CodeHub.Model.Repositories;
 
-namespace CodeHub.Model.File;
+namespace CodeHub.Model.Files;
 
 public class FileViewModel
 {
