@@ -28,7 +28,7 @@ public class BranchRepositoryService : IBranchRepositoryService
     public async Task<BranchRepositoryViewModel> CreateAsync(BranchRepositoryCreateModel branchRepository)
     {
         var existUser = await userService.GetByIdAsync(branchRepository.UserId);
-        var existRepository = await repositoryService.GetByIdAsync(branchRepository.UserId);
+        var existRepository = await repositoryService.GetByIdAsync(branchRepository.RepositoryId);
 
         var existBranchRepository = Repository
             .SelectAsQueryableAsync()
