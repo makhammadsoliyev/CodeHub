@@ -1,7 +1,8 @@
-﻿namespace CodeHub.Model.File;
+﻿namespace CodeHub.Model.Files;
 
-public class FileCreateModel
+public class FileUpdateModel
 {
+    public long Id { get; set; }
     public string Name { get; set; }
     public long? FolderId { get; set; }
     public string Content { get; set; }

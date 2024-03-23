@@ -1,4 +1,4 @@
-﻿using CodeHub.Model.Readme;
+﻿using CodeHub.Model.Readmes;
 
 namespace CodeHub.Service.Interfaces;
 
