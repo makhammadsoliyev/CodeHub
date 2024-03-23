@@ -32,7 +32,6 @@ public class BranchRepositoryService : IBranchRepositoryService
 
         var existBranchRepository = Repository
             .SelectAsQueryableAsync()
-            .Where(br => br.UserId == branchRepository.UserId)
             .Where(br => br.RepositoryId == branchRepository.RepositoryId)
             .FirstOrDefault(br => br.BranchName == branchRepository.BranchName);
 
