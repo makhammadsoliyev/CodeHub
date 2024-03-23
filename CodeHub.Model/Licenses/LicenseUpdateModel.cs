@@ -1,6 +1,6 @@
-﻿namespace CodeHub.Model.GitIgnores;
+﻿namespace CodeHub.Model.Licenses;
 
-public class GitIgnoreViewModel
+public class LicenseUpdateModel
 {
     public long Id { get; set; }
     public string Name { get; set; }
