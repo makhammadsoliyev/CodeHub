@@ -50,7 +50,8 @@ public class RepositoryStarService : IRepositoryStarService
     public async Task<IEnumerable<RepositoryStarViewModel>> GetAllAsync()
     {
         var respotoryStars = await repository
-            .SelectAsQueryable(new string[] { "Repository", "User" }).ToListAsync();
+            .SelectAsQueryable(new string[] { "Repository", "User" })
+            .ToListAsync();
 
         return mapper.Map<IEnumerable<RepositoryStarViewModel>>(respotoryStars);
     }
