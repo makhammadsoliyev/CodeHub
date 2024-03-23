@@ -44,7 +44,7 @@ public class UsersController : ControllerBase
 
     // POST api/<UsersController>
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] UserCreateModel user)
+    public async Task<IActionResult> PostAsync([FromBody] UserCreateModel user)
     {
         return Ok(new Response()
         {
@@ -56,7 +56,7 @@ public class UsersController : ControllerBase
 
     // PUT api/<UsersController>/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(long id, [FromBody] UserUpdateModel user)
+    public async Task<IActionResult> PutASync(long id, [FromBody] UserUpdateModel user)
     {
         return Ok(new Response()
         {
@@ -68,7 +68,7 @@ public class UsersController : ControllerBase
 
     // DELETE api/<UsersController>/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> DeleteAsync(int id)
     {
         return Ok(new Response()
         {
