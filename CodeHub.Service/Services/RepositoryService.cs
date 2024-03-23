@@ -83,6 +83,6 @@ public class RepositoryService : IRepositoryService
         var updateRepository = await repository.UpdateAsync(mappedRepository);
         await repository.SaveAsync();
 
-        return mapper.Map<RepositoryViewModel>(mappedRepository);
+        return mapper.Map<RepositoryViewModel>(updateRepository);
     }
 }
