@@ -71,11 +71,9 @@ public class MappingProfile : Profile
         CreateMap<Readme, ReadmeCreateModel>().ReverseMap();
 
         CreateMap<RepositoryStar, RepositoryStarViewModel>().ReverseMap();
-        CreateMap<RepositoryStar, RepositoryStarUpdateModel>().ReverseMap();
         CreateMap<RepositoryStar, RepositoryStarCreateModel>().ReverseMap();
 
         CreateMap<Follow, FollowViewModel>().ReverseMap().ReverseMap();
-        CreateMap<Follow, FollowUpdateModel>().ReverseMap().ReverseMap();
         CreateMap<Follow, FollowCreateModel>().ReverseMap().ReverseMap();
     }
 }

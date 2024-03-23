@@ -22,6 +22,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILicenseService, LicenseService>();
+builder.Services.AddScoped<IGitIgnoreService, GitIgnoreService>();
 
 var app = builder.Build();
 

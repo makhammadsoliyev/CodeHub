@@ -1,5 +1,5 @@
 ﻿using CodeHub.Api.Models;
-using CodeHub.Model.Licenses;
+using CodeHub.Model.GitIgnores;
 using CodeHub.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,16 +9,16 @@ namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class LicensesController : ControllerBase
+public class GitIgnoresController : ControllerBase
 {
-    private readonly ILicenseService licenseService;
+    private readonly IGitIgnoreService gitIgnoreService;
 
-    public LicensesController(ILicenseService licenseService)
+    public GitIgnoresController(IGitIgnoreService gitIgnoreService)
     {
-        this.licenseService = licenseService;
+        this.gitIgnoreService = gitIgnoreService;
     }
 
-    // GET: api/<LicensesController>
+    // GET: api/<GitIgnoresController>
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
@@ -26,11 +26,11 @@ public class LicensesController : ControllerBase
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.GetAllAsync()
+            Data = await gitIgnoreService.GetAllAsync()
         });
     }
 
-    // GET api/<LicensesController>/5
+    // GET api/<GitIgnoresController>/5
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync(long id)
     {
@@ -38,43 +38,43 @@ public class LicensesController : ControllerBase
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.GetByIdAsync(id)
+            Data = await gitIgnoreService.GetByIdAsync(id)
         });
     }
 
-    // POST api/<LicensesController>
+    // POST api/<GitIgnoresController>
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] LicenseCreateModell license)
+    public async Task<IActionResult> PostAsync([FromBody] GitIgnoreCreateModel gitIgnore)
     {
         return Ok(new Response()
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.CreateAsync(license)
+            Data = await gitIgnoreService.CreateAsync(gitIgnore)
         });
     }
 
-    // PUT api/<LicensesController>/5
+    // PUT api/<GitIgnoresController>/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long id, [FromBody] LicenseUpdateModel license)
+    public async Task<IActionResult> PutAsync(long id, [FromBody] GitIgnoreUpdateModel gitIgnore)
     {
         return Ok(new Response()
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.UpdateAsync(id, license)
+            Data = await gitIgnoreService.UpdateAsync(id, gitIgnore)
         });
     }
 
-    // DELETE api/<LicensesController>/5
+    // DELETE api/<GitIgnoresController>/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> DeleteAsync(long id)
     {
         return Ok(new Response()
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.DeleteAsync(id)
+            Data = await gitIgnoreService.DeleteAsync(id)
         });
     }
 }
