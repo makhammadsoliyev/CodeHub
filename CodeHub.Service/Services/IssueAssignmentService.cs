@@ -15,7 +15,7 @@ public class IssueAssignmentService : IIssueAssignmentService
     private IUserService userService;
 
 
-    public IssueAssignmentService(IMapper mapper, IGenericRepository<IssueAssignment> repository, IssueService issueService, IUserService userService)
+    public IssueAssignmentService(IMapper mapper, IGenericRepository<IssueAssignment> repository, IIssueService issueService, IUserService userService)
     {
         this.mapper = mapper;
         this.repository = repository;
@@ -65,7 +65,7 @@ public class IssueAssignmentService : IIssueAssignmentService
     }
 
 
-    public async Task<IssueAssignmentViewModel> GetById(long id)
+    public async Task<IssueAssignmentViewModel> GetByIdAsync(long id)
     {
         var existIssue = await repository.SelectByIdAsync(id, new string[] { "Issue", "User" })
              ?? throw new CustomException(404, "Issue Assignment not found");

@@ -11,5 +11,4 @@ public class File : Auditable
     public string Extension { get; set; }
     public long RepositoryId { get; set; }
     public Repository Repository { get; set; }
-
 }

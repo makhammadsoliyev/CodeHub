@@ -23,7 +23,15 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILicenseService, LicenseService>();
 builder.Services.AddScoped<IGitIgnoreService, GitIgnoreService>();
+builder.Services.AddScoped<IRepositoryService, RepositoryService>();
 builder.Services.AddScoped<IReadmeService, ReadmeService>();
+builder.Services.AddScoped<IIssueService, IssueService>();
+builder.Services.AddScoped<IIssueAssignmentService, IssueAssignmentService>();
+builder.Services.AddScoped<IBranchRepositoryService, BranchRepositoryService>();
+builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IRepositoryStarService, RepositoryStarService>();
+builder.Services.AddScoped<IFollowService, FollowService>();
+
 
 var app = builder.Build();
 
