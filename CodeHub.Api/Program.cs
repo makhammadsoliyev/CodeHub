@@ -27,6 +27,9 @@ builder.Services.AddScoped<IRepositoryService, RepositoryService>();
 builder.Services.AddScoped<IReadmeService, ReadmeService>();
 builder.Services.AddScoped<IIssueAssignmentService, IssueAssignmentService>();
 builder.Services.AddScoped<IBranchRepositoryService, BranchRepositoryService>();
+builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IRepositoryStarService, RepositoryStarService>();
+
 
 var app = builder.Build();
 
