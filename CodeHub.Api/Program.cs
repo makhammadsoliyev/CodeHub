@@ -29,6 +29,7 @@ builder.Services.AddScoped<IIssueAssignmentService, IssueAssignmentService>();
 builder.Services.AddScoped<IBranchRepositoryService, BranchRepositoryService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IRepositoryStarService, RepositoryStarService>();
+builder.Services.AddScoped<IFollowService, FollowService>();
 
 
 var app = builder.Build();
