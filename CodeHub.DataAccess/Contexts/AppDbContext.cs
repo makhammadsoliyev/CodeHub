@@ -9,6 +9,8 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions options) : base(options)
     {
+        //Database.MigrateAsync();
+        //Database.EnsureCreatedAsync();
     }
 
     public DbSet<User> Users { get; set; }
