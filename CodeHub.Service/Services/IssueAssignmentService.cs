@@ -27,15 +27,15 @@ public class IssueAssignmentService : IIssueAssignmentService
     public async Task<IssueAssignmentViewModel> CreateAsync(IssueAssignmentCreateModel issue)
     {
         var existUser = await userService.GetByIdAsync(issue.AssignessId);
-        var existIssue = await issueService.GetByAsync(issue.IssueId);
+        var existIssue = await issueService.GetByIdAsync(issue.IssueId);
 
         var existIssueAssignment = await repository
-            .SelectAsQueryableAsync()
-            .Where(r => r.AssignessId == issue.AssignessId)
+            .SelectAsQueryable()
+            .Where(r => r.AssigneesId == issue.AssignessId)
             .FirstOrDefaultAsync(r => r.Id == issue.IssueId);
 
         if (existIssue is not null)
-            throw new CustomException(409, "Issue Assignmnet is already exist with this id");
+            throw new CustomException(409, "Issue Assignment is already exist with this id");
         var createdIssue = await repository.InsertAsync(existIssueAssignment);
         await repository.SaveAsync();
 
@@ -58,8 +58,8 @@ public class IssueAssignmentService : IIssueAssignmentService
     public async Task<IEnumerable<IssueAssignmentViewModel>> GetAllAsync()
     {
         var issues = await repository
-         .SelectAsQueryableAsync(
-           new string[] { "Issue", "User" }).ToListAsync();
+         .SelectAsQueryable(new string[] { "Issue", "User" })
+         .ToListAsync();
 
         return mapper.Map<IEnumerable<IssueAssignmentViewModel>>(issues);
     }
@@ -68,7 +68,7 @@ public class IssueAssignmentService : IIssueAssignmentService
     public async Task<IssueAssignmentViewModel> GetById(long id)
     {
         var existIssue = await repository.SelectByIdAsync(id, new string[] { "Issue", "User" })
-             ?? throw new CustomException(404, "Issue Assignmnet not found");
+             ?? throw new CustomException(404, "Issue Assignment not found");
 
         return mapper.Map<IssueAssignmentViewModel>(existIssue);
     }
@@ -77,7 +77,7 @@ public class IssueAssignmentService : IIssueAssignmentService
     public async Task<IssueAssignmentViewModel> UpdateAsync(long id, IssueAssignmentUpdateModel issue)
     {
         var existUser = await userService.GetByIdAsync(issue.AssignessId);
-        var existIssue = await issueService.GetByAsync(issue.IssueId);
+        var existIssue = await issueService.GetByIdAsync(issue.IssueId);
 
         var existIssueAssignment = await repository.SelectByIdAsync(id)
            ?? throw new CustomException(404, "Issue Assignment not found");
