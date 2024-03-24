@@ -24,6 +24,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILicenseService, LicenseService>();
 builder.Services.AddScoped<IGitIgnoreService, GitIgnoreService>();
 builder.Services.AddScoped<IReadmeService, ReadmeService>();
+builder.Services.AddScoped<IIssueAssignmentService, IssueAssignmentService>();
 
 var app = builder.Build();
 
