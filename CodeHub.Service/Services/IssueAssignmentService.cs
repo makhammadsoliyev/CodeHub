@@ -27,11 +27,11 @@ public class IssueAssignmentService : IIssueAssignmentService
     public async Task<IssueAssignmentViewModel> CreateAsync(IssueAssignmentCreateModel issue)
     {
         var existUser = await userService.GetByIdAsync(issue.AssignessId);
-        var existIssue = await issueService.GetByAsync(issue.IssueId);
+        var existIssue = await issueService.GetByIdAsync(issue.IssueId);
 
         var existIssueAssignment = await repository
-            .SelectAsQueryableAsync()
-            .Where(r => r.AssignessId == issue.AssignessId)
+            .SelectAsQueryable()
+            .Where(r => r.AssigneesId == issue.AssignessId)
             .FirstOrDefaultAsync(r => r.Id == issue.IssueId);
 
         if (existIssue is not null)
@@ -58,7 +58,7 @@ public class IssueAssignmentService : IIssueAssignmentService
     public async Task<IEnumerable<IssueAssignmentViewModel>> GetAllAsync()
     {
         var issues = await repository
-         .SelectAsQueryableAsync(
+         .SelectAsQueryable(
            new string[] { "Issue", "User" }).ToListAsync();
 
         return mapper.Map<IEnumerable<IssueAssignmentViewModel>>(issues);
@@ -77,7 +77,7 @@ public class IssueAssignmentService : IIssueAssignmentService
     public async Task<IssueAssignmentViewModel> UpdateAsync(long id, IssueAssignmentUpdateModel issue)
     {
         var existUser = await userService.GetByIdAsync(issue.AssignessId);
-        var existIssue = await issueService.GetByAsync(issue.IssueId);
+        var existIssue = await issueService.GetByIdAsync(issue.IssueId);
 
         var existIssueAssignment = await repository.SelectByIdAsync(id)
            ?? throw new CustomException(404, "Issue Assignment not found");
