@@ -15,7 +15,7 @@ public class IssueAssignmentService : IIssueAssignmentService
     private IUserService userService;
 
 
-    public IssueAssignmentService(IMapper mapper, IGenericRepository<IssueAssignment> repository, IssueService issueService, IUserService userService)
+    public IssueAssignmentService(IMapper mapper, IGenericRepository<IssueAssignment> repository, IIssueService issueService, IUserService userService)
     {
         this.mapper = mapper;
         this.repository = repository;
