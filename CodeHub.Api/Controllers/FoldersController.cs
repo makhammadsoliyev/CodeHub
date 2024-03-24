@@ -9,14 +9,18 @@ namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+
 public class FoldersController : ControllerBase
 {
     private readonly IFolderService folderService;
+
 
     public FoldersController(IFolderService folderService)
     {
         this.folderService = folderService;
     }
+
+    
     // GET: api/<FoldersController>
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
@@ -28,7 +32,9 @@ public class FoldersController : ControllerBase
             Data = await folderService.GetAllAsync()
         });
     }
-    // GET: api/<FoldersController>
+
+    
+    // GET: api/<FoldersController>/5
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync(long id)
     {
@@ -39,6 +45,8 @@ public class FoldersController : ControllerBase
             Data = await folderService.GetByIdAsync(id)
         });
     }
+
+    
     // POST api/<FoldersController>
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] FolderCreateModel folder)
@@ -50,6 +58,8 @@ public class FoldersController : ControllerBase
             Data = await folderService.CreateAsync(folder)
         });
     }
+
+    
     // PUT api/<FoldersController>/5
     [HttpPut("{id}")]
     public async Task<IActionResult> PutASync(long id, [FromBody] FolderUpdateModel folder)
@@ -61,6 +71,8 @@ public class FoldersController : ControllerBase
             Data = await folderService.UpdateAsync(id, folder)
         });
     }
+
+    
     // DELETE api/<FoldersController>/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(int id)
