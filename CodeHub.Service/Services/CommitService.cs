@@ -30,19 +30,19 @@ public class CommitService : ICommitService
         var existUser = await userService.GetByIdAsync(commit.UserId);
         var existRepository = await repositoryService.GetByIdAsync(commit.RepositoryId);
 
-        var createdFork = await Repository.InsertAsync(mapper.Map<Commit>(commit));
+        var createdCommit = await Repository.InsertAsync(mapper.Map<Commit>(commit));
         await Repository.SaveAsync();
 
-        return mapper.Map<CommitViewModel>(createdFork);
+        return mapper.Map<CommitViewModel>(createdCommit);
     }
 
 
     public async Task<bool> DeleteAsync(long id)
     {
-        var existFork = await Repository.SelectByIdAsync(id)
+        var existCommit = await Repository.SelectByIdAsync(id)
             ?? throw new CustomException(404, "Not found");
 
-        await Repository.DeleteAsync(existFork);
+        await Repository.DeleteAsync(existCommit);
         await Repository.SaveAsync();
 
         return true;
