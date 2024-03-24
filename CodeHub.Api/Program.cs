@@ -25,6 +25,9 @@ builder.Services.AddScoped<ILicenseService, LicenseService>();
 builder.Services.AddScoped<IGitIgnoreService, GitIgnoreService>();
 builder.Services.AddScoped<IReadmeService, ReadmeService>();
 builder.Services.AddScoped<IIssueAssignmentService, IssueAssignmentService>();
+//builder.Services.AddScoped<IRepositoryService, RepositoryService>();
+builder.Services.AddScoped<IBranchRepositoryService, BranchRepositoryService>();
+
 
 var app = builder.Build();
 
