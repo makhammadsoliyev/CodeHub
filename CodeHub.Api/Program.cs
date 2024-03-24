@@ -25,6 +25,7 @@ builder.Services.AddScoped<ILicenseService, LicenseService>();
 builder.Services.AddScoped<IGitIgnoreService, GitIgnoreService>();
 builder.Services.AddScoped<IRepositoryService, RepositoryService>();
 builder.Services.AddScoped<IReadmeService, ReadmeService>();
+builder.Services.AddScoped<IIssueService, IssueService>();
 builder.Services.AddScoped<IIssueAssignmentService, IssueAssignmentService>();
 builder.Services.AddScoped<IBranchRepositoryService, BranchRepositoryService>();
 builder.Services.AddScoped<IFileService, FileService>();
