@@ -38,7 +38,7 @@ public class FilesController : ControllerBase
             Message = "Ok",
             StatusCode = 200,
             Data = await fileService.GetByIdAsync(id)
-        }); ;
+        });
     }
 
     // POST api/<FilesController>
