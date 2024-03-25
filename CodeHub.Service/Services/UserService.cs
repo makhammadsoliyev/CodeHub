@@ -4,7 +4,6 @@ using CodeHub.Domain.Entities;
 using CodeHub.Model.Users;
 using CodeHub.Service.Exceptions;
 using CodeHub.Service.Interfaces;
-using CodeHub.Service.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeHub.Service.Services;
@@ -51,14 +50,14 @@ public class UserService : IUserService
     {
         var users = await repository
             .SelectAsQueryable(
-                new string[] { "Repositories" }).ToListAsync();
+                new string[] { "Repositories", "Followings", "Followers", "Forks" }).ToListAsync();
 
         return mapper.Map<IEnumerable<UserViewModel>>(users);
     }
 
     public async Task<UserViewModel> GetByIdAsync(long id)
     {
-        var existUser = await repository.SelectByIdAsync(id, new string[] { "Repositories" })
+        var existUser = await repository.SelectByIdAsync(id, new string[] { "Repositories", "Followings", "Followers", "Forks" })
             ?? throw new CustomException(404, "User not found");
 
         return mapper.Map<UserViewModel>(existUser);

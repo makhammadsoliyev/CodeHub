@@ -1,5 +1,5 @@
 ﻿using CodeHub.Api.Models;
-using CodeHub.Model.Licenses;
+using CodeHub.Model.Repositories;
 using CodeHub.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,16 +9,16 @@ namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class LicensesController : ControllerBase
+public class RepositoriesController : ControllerBase
 {
-    private readonly ILicenseService licenseService;
+    private readonly IRepositoryService repositoryService;
 
-    public LicensesController(ILicenseService licenseService)
+    public RepositoriesController(IRepositoryService repositoryService)
     {
-        this.licenseService = licenseService;
+        this.repositoryService = repositoryService;
     }
 
-    // GET: api/<LicensesController>
+    // GET: api/<RepositoriesController>
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
@@ -26,11 +26,11 @@ public class LicensesController : ControllerBase
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.GetAllAsync()
+            Data = await repositoryService.GetAllAsync()
         });
     }
 
-    // GET api/<LicensesController>/5
+    // GET api/<RepositoriesController>/5
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync(long id)
     {
@@ -38,35 +38,35 @@ public class LicensesController : ControllerBase
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.GetByIdAsync(id)
+            Data = await repositoryService.GetByIdAsync(id)
         });
     }
 
-    // POST api/<LicensesController>
+    // POST api/<RepositoriesController>
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] LicenseCreateModell license)
+    public async Task<IActionResult> PostAsync([FromBody] RepositoryCreateModel repository)
     {
         return Ok(new Response()
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.CreateAsync(license)
+            Data = await repositoryService.CreateAsync(repository)
         });
     }
 
-    // PUT api/<LicensesController>/5
+    // PUT api/<RepositoriesController>/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long id, [FromBody] LicenseUpdateModel license)
+    public async Task<IActionResult> PutAsync(long id, [FromBody] RepositoryUpdateModel repository)
     {
         return Ok(new Response()
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.UpdateAsync(id, license)
+            Data = await repositoryService.UpdateAsync(id, repository)
         });
     }
 
-    // DELETE api/<LicensesController>/5
+    // DELETE api/<RepositoriesController>/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
@@ -74,7 +74,7 @@ public class LicensesController : ControllerBase
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.DeleteAsync(id)
+            Data = await repositoryService.DeleteAsync(id)
         });
     }
 }

@@ -56,7 +56,8 @@ public class RepositoryService : IRepositoryService
     public async Task<IEnumerable<RepositoryViewModel>> GetAllAsync()
     {
         var Repositories = await repository
-            .SelectAsQueryable(new string[] { "Readme", "GitIgnore", "License", "Parent" })
+            .SelectAsQueryable(new string[] 
+            { "Readme", "GitIgnore", "License", "Parent", "Issues", "Folders", "Commits", "Stars", "BranchRepositories" })
             .ToListAsync();
 
         return mapper.Map<IEnumerable<RepositoryViewModel>>(Repositories);
@@ -65,7 +66,9 @@ public class RepositoryService : IRepositoryService
 
     public async Task<RepositoryViewModel> GetByIdAsync(long id)
     {
-        var existRepository = await repository.SelectByIdAsync(id, new string[] { "Readme", "GitIgnore", "License", "Parent" })
+        var existRepository = await repository.SelectByIdAsync
+            (id, new string[] 
+            { "Readme", "GitIgnore", "License", "Parent", "Issues", "Folders", "Commits", "Stars", "BranchRepositories" })
             ?? throw new CustomException(404, "Repository is not found");
 
         return mapper.Map<RepositoryViewModel>(existRepository);

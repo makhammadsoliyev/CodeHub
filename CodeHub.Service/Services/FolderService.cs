@@ -13,7 +13,7 @@ public class FolderService : IFolderService
     private readonly IMapper mapper;
     private readonly IGenericRepository<Folder> repository;
 
-    public FolderService(IMapper mapper , IGenericRepository<Folder> repository)
+    public FolderService(IMapper mapper, IGenericRepository<Folder> repository)
     {
         this.mapper = mapper;
         this.repository = repository;
@@ -29,7 +29,7 @@ public class FolderService : IFolderService
 
     public async Task<bool> DeleteAsync(long id)
     {
-        var existFolder = await repository.SelectByIdAsync(id)
+        var existFolder = await repository.SelectByIdAsync(id, new string[] { "Files" })
             ?? throw new CustomException(404, "Folder not found");
 
         await repository.DeleteAsync(existFolder);
@@ -40,7 +40,7 @@ public class FolderService : IFolderService
 
     public async Task<IEnumerable<FolderViewModel>> GetAllAsync()
     {
-        var folders = await repository.SelectAsQueryable().ToListAsync();
+        var folders = await repository.SelectAsQueryable(new string[] { "Files" }).ToListAsync();
         return mapper.Map<IEnumerable<FolderViewModel>>(folders);
     }
 
@@ -57,7 +57,7 @@ public class FolderService : IFolderService
         var existFolder = await repository.SelectByIdAsync(id)
             ?? throw new CustomException(404, "Folder not found");
 
-        var mappedFolder = mapper.Map(folder,existFolder);
+        var mappedFolder = mapper.Map(folder, existFolder);
         var updateFolder = await repository.UpdateAsync(mappedFolder);
 
         return mapper.Map<FolderViewModel>(updateFolder);

@@ -1,5 +1,5 @@
 ﻿using CodeHub.Api.Models;
-using CodeHub.Model.Users;
+using CodeHub.Model.Folders;
 using CodeHub.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,16 +9,18 @@ namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UsersController : ControllerBase
+public class FoldersController : ControllerBase
 {
-    private readonly IUserService userService;
+    private readonly IFolderService folderService;
 
-    public UsersController(IUserService userService)
+
+    public FoldersController(IFolderService folderService)
     {
-        this.userService = userService;
+        this.folderService = folderService;
     }
 
-    // GET: api/<UsersController>
+
+    // GET: api/<FoldersController>
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
@@ -26,11 +28,12 @@ public class UsersController : ControllerBase
         {
             StatusCode = 200,
             Message = "OK",
-            Data = await userService.GetAllAsync()
+            Data = await folderService.GetAllAsync()
         });
     }
 
-    // GET api/<UsersController>/5
+
+    // GET: api/<FoldersController>/5
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync(long id)
     {
@@ -38,35 +41,38 @@ public class UsersController : ControllerBase
         {
             StatusCode = 200,
             Message = "OK",
-            Data = await userService.GetByIdAsync(id)
+            Data = await folderService.GetByIdAsync(id)
         });
     }
 
-    // POST api/<UsersController>
+
+    // POST api/<FoldersController>
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] UserCreateModel user)
+    public async Task<IActionResult> PostAsync([FromBody] FolderCreateModel folder)
     {
         return Ok(new Response()
         {
             StatusCode = 200,
             Message = "OK",
-            Data = await userService.CreateAsync(user)
+            Data = await folderService.CreateAsync(folder)
         });
     }
 
-    // PUT api/<UsersController>/5
+
+    // PUT api/<FoldersController>/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutASync(long id, [FromBody] UserUpdateModel user)
+    public async Task<IActionResult> PutASync(long id, [FromBody] FolderUpdateModel folder)
     {
         return Ok(new Response()
         {
             StatusCode = 200,
             Message = "OK",
-            Data = await userService.UpdateAsync(id, user)
+            Data = await folderService.UpdateAsync(id, folder)
         });
     }
 
-    // DELETE api/<UsersController>/5
+
+    // DELETE api/<FoldersController>/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
@@ -74,7 +80,7 @@ public class UsersController : ControllerBase
         {
             StatusCode = 200,
             Message = "OK",
-            Data = await userService.DeleteAsync(id)
+            Data = await folderService.DeleteAsync(id)
         });
     }
 }

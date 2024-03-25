@@ -1,5 +1,5 @@
 ﻿using CodeHub.Api.Models;
-using CodeHub.Model.Users;
+using CodeHub.Model.Readmes;
 using CodeHub.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,72 +9,72 @@ namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UsersController : ControllerBase
+public class ReadmesController : ControllerBase
 {
-    private readonly IUserService userService;
+    private readonly IReadmeService readmeService;
 
-    public UsersController(IUserService userService)
+    public ReadmesController(IReadmeService readmeService)
     {
-        this.userService = userService;
+        this.readmeService = readmeService;
     }
 
-    // GET: api/<UsersController>
+    // GET: api/<ReadmesController>
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
         return Ok(new Response()
         {
-            StatusCode = 200,
             Message = "OK",
-            Data = await userService.GetAllAsync()
+            StatusCode = 200,
+            Data = await readmeService.GetAllAsync()
         });
     }
 
-    // GET api/<UsersController>/5
+    // GET api/<ReadmesController>/5
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync(long id)
     {
         return Ok(new Response()
         {
-            StatusCode = 200,
             Message = "OK",
-            Data = await userService.GetByIdAsync(id)
+            StatusCode = 200,
+            Data = await readmeService.GetByIdAsync(id)
         });
     }
 
-    // POST api/<UsersController>
+    // POST api/<ReadmesController>
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] UserCreateModel user)
+    public async Task<IActionResult> PostAsync([FromBody] ReadmeCreateModel readme)
     {
         return Ok(new Response()
         {
-            StatusCode = 200,
             Message = "OK",
-            Data = await userService.CreateAsync(user)
+            StatusCode = 200,
+            Data = await readmeService.CreateAsync(readme)
         });
     }
 
-    // PUT api/<UsersController>/5
+    // PUT api/<ReadmesController>/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutASync(long id, [FromBody] UserUpdateModel user)
+    public async Task<IActionResult> PutAsync(long id, [FromBody] ReadmeUpdateModel readme)
     {
         return Ok(new Response()
         {
-            StatusCode = 200,
             Message = "OK",
-            Data = await userService.UpdateAsync(id, user)
+            StatusCode = 200,
+            Data = await readmeService.UpdateAsync(id, readme)
         });
     }
 
-    // DELETE api/<UsersController>/5
+    // DELETE api/<ReadmesController>/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
         return Ok(new Response()
         {
-            StatusCode = 200,
             Message = "OK",
-            Data = await userService.DeleteAsync(id)
+            StatusCode = 200,
+            Data = await readmeService.DeleteAsync(id)
         });
     }
 }

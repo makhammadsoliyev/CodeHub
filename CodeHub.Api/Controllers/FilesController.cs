@@ -1,5 +1,5 @@
 ﻿using CodeHub.Api.Models;
-using CodeHub.Model.Licenses;
+using CodeHub.Model.Files;
 using CodeHub.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,72 +9,73 @@ namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class LicensesController : ControllerBase
+public class FilesController : ControllerBase
 {
-    private readonly ILicenseService licenseService;
+    private readonly IFileService fileService;
 
-    public LicensesController(ILicenseService licenseService)
+    public FilesController(IFileService fileService)
     {
-        this.licenseService = licenseService;
+        this.fileService = fileService;
     }
 
-    // GET: api/<LicensesController>
+    // GET: api/<FilesController>
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
         return Ok(new Response()
         {
-            Message = "OK",
+            Message = "Ok",
             StatusCode = 200,
-            Data = await licenseService.GetAllAsync()
+            Data = await fileService.GetAllAsync()
         });
+
     }
 
-    // GET api/<LicensesController>/5
+    // GET: api/<FilesController/Details/5>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync(long id)
     {
         return Ok(new Response()
         {
-            Message = "OK",
+            Message = "Ok",
             StatusCode = 200,
-            Data = await licenseService.GetByIdAsync(id)
+            Data = await fileService.GetByIdAsync(id)
         });
     }
 
-    // POST api/<LicensesController>
+    // POST api/<FilesController>
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] LicenseCreateModell license)
+    public async Task<IActionResult> PostAsync([FromBody] FileCreateModel file)
     {
         return Ok(new Response()
         {
-            Message = "OK",
+            Message = "Ok",
             StatusCode = 200,
-            Data = await licenseService.CreateAsync(license)
+            Data = await fileService.CreateAsync(file)
         });
     }
 
-    // PUT api/<LicensesController>/5
+    // PUT api/<FilesController>/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long id, [FromBody] LicenseUpdateModel license)
+    public async Task<IActionResult> PutAsync(long id, [FromBody] FileUpdateModel file)
     {
         return Ok(new Response()
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.UpdateAsync(id, license)
+            Data = await fileService.UpdateAsync(id, file)
         });
     }
 
-    // DELETE api/<LicensesController>/5
+    // DELETE api/<FilesController>/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> DeleteAsync(long id)
     {
         return Ok(new Response()
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.DeleteAsync(id)
+            Data = await fileService.DeleteAsync(id)
         });
     }
 }

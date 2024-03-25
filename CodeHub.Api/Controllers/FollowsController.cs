@@ -1,5 +1,5 @@
 ﻿using CodeHub.Api.Models;
-using CodeHub.Model.Licenses;
+using CodeHub.Model.Follow;
 using CodeHub.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,16 +9,16 @@ namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class LicensesController : ControllerBase
+public class FollowsController : ControllerBase
 {
-    private readonly ILicenseService licenseService;
+    private IFollowService followService;
 
-    public LicensesController(ILicenseService licenseService)
+    public FollowsController(IFollowService followService)
     {
-        this.licenseService = licenseService;
+        this.followService = followService;
     }
 
-    // GET: api/<LicensesController>
+    // GET: api/<FollowController>
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
@@ -26,11 +26,11 @@ public class LicensesController : ControllerBase
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.GetAllAsync()
+            Data = await followService.GetAllAsync()
         });
     }
 
-    // GET api/<LicensesController>/5
+    // GET api/<FollowController>/5
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync(long id)
     {
@@ -38,35 +38,23 @@ public class LicensesController : ControllerBase
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.GetByIdAsync(id)
+            Data = await followService.GetByIdAsync(id)
         });
     }
 
-    // POST api/<LicensesController>
+    // POST api/<FollowController>
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] LicenseCreateModell license)
+    public async Task<IActionResult> PostAsync([FromBody] FollowCreateModel follow)
     {
         return Ok(new Response()
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.CreateAsync(license)
+            Data = await followService.CreateAsync(follow)
         });
     }
 
-    // PUT api/<LicensesController>/5
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long id, [FromBody] LicenseUpdateModel license)
-    {
-        return Ok(new Response()
-        {
-            Message = "OK",
-            StatusCode = 200,
-            Data = await licenseService.UpdateAsync(id, license)
-        });
-    }
-
-    // DELETE api/<LicensesController>/5
+    // DELETE api/<FollowController>/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
@@ -74,7 +62,7 @@ public class LicensesController : ControllerBase
         {
             Message = "OK",
             StatusCode = 200,
-            Data = await licenseService.DeleteAsync(id)
+            Data = await followService.DeleteAsync(id)
         });
     }
 }
