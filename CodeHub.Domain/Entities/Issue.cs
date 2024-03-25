@@ -13,5 +13,5 @@ public class Issue : Auditable
     public long CreatorId { get; set; }
     public User Creator { get; set; }
 
-    public IEnumerable<IssueAssignment> Assignees { get; set; }
+    public IEnumerable<IssueAssignment> IssueAssignees { get; set; }
 }

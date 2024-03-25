@@ -91,7 +91,7 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Commit>()
            .HasOne(commit => commit.Repository)
-           .WithMany()
+           .WithMany(repository => repository.Commits)
            .HasForeignKey(commit => commit.RepositoryId);
 
         modelBuilder.Entity<Commit>()
@@ -108,14 +108,14 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Issue>()
            .HasOne(issue => issue.Repository)
-           .WithMany()
+           .WithMany(repository => repository.Issues)
            .HasForeignKey(issue => issue.RepositoryId);
 
 
         // IssueAssignment
         modelBuilder.Entity<IssueAssignment>()
             .HasOne(issueAssignment => issueAssignment.Issue)
-            .WithMany()
+            .WithMany(issue => issue.IssueAssignees)
             .HasForeignKey(issueAssignment => issueAssignment.IssueId);
 
         modelBuilder.Entity<IssueAssignment>()
@@ -127,7 +127,7 @@ public class AppDbContext : DbContext
         // Repository Fork
         modelBuilder.Entity<RepositoryFork>()
             .HasOne(repositoryFork => repositoryFork.User)
-            .WithMany()
+            .WithMany(user => user.Forks)
             .HasForeignKey(repositoryFork => repositoryFork.UserId);
 
         modelBuilder.Entity<RepositoryFork>()
@@ -144,25 +144,25 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<RepositoryStar>()
             .HasOne(repositoryStar => repositoryStar.Repository)
-            .WithMany()
+            .WithMany(repository => repository.Stars)
             .HasForeignKey(repositoryStar => repositoryStar.RepositoryId);
 
 
         // Follow
         modelBuilder.Entity<Follow>()
             .HasOne(follow => follow.Following)
-            .WithMany()
+            .WithMany(user => user.Followings)
             .HasForeignKey(follow => follow.FollowingId);
 
         modelBuilder.Entity<Follow>()
            .HasOne(follow => follow.Follower)
-           .WithMany()
+           .WithMany(user => user.Followers)
            .HasForeignKey(follow => follow.FollowerId);
 
         // Folder
         modelBuilder.Entity<Folder>()
             .HasOne(folder => folder.Repository)
-            .WithMany()
+            .WithMany(repository => repository.Folders)
             .HasForeignKey(folder => folder.RepositoryId);
 
         modelBuilder.Entity<Folder>()
@@ -179,7 +179,7 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<File>()
            .HasOne(file => file.Folder)
-           .WithMany()
+           .WithMany(folder => folder.Files)
            .HasForeignKey(file => file.FolderId);
 
     }
