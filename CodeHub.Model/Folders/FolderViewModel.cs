@@ -1,5 +1,4 @@
-﻿using CodeHub.Domain.Entities;
-using CodeHub.Model.Repositories;
+﻿using CodeHub.Model.Repositories;
 
 namespace CodeHub.Model.Folders;
 
