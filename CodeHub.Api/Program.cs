@@ -33,6 +33,7 @@ builder.Services.AddScoped<IRepositoryStarService, RepositoryStarService>();
 builder.Services.AddScoped<IFollowService, FollowService>();
 builder.Services.AddScoped<IFolderService, FolderService>();
 builder.Services.AddScoped<ICommitService, CommitService>();
+builder.Services.AddScoped<IRepositoryForkService, RepositoryForkService>();
 
 var app = builder.Build();
 
