@@ -50,7 +50,7 @@ public class IssueService : IIssueService
     public async Task<IEnumerable<IssueViewModel>> GetAllAsync()
     {
         var issues = await repository
-          .SelectAsQueryable(new string[] { "Repository", "User" })
+          .SelectAsQueryable(new string[] { "Repository", "User", "IssueAssignees" })
           .ToListAsync();
 
         return mapper.Map<IEnumerable<IssueViewModel>>(issues);
@@ -59,7 +59,7 @@ public class IssueService : IIssueService
 
     public async Task<IssueViewModel> GetByIdAsync(long id)
     {
-        var existIssue = await repository.SelectByIdAsync(id, new string[] { "Repositories" })
+        var existIssue = await repository.SelectByIdAsync(id, new string[] { "Repository", "IssueAssignees", "User" })
             ?? throw new CustomException(404, "Issue not found");
 
         return mapper.Map<IssueViewModel>(existIssue);
