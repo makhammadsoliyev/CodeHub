@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CodeHub.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigrations : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -176,6 +176,21 @@ namespace CodeHub.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BranchRepositories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BranchRepositories_GitIgnores_GitIgnoreId",
+                        column: x => x.GitIgnoreId,
+                        principalTable: "GitIgnores",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_BranchRepositories_Licenses_LicenseId",
+                        column: x => x.LicenseId,
+                        principalTable: "Licenses",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_BranchRepositories_Readmes_ReadmeId",
+                        column: x => x.ReadmeId,
+                        principalTable: "Readmes",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_BranchRepositories_Repositories_RepositoryId",
                         column: x => x.RepositoryId,
@@ -396,6 +411,21 @@ namespace CodeHub.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BranchRepositories_GitIgnoreId",
+                table: "BranchRepositories",
+                column: "GitIgnoreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BranchRepositories_LicenseId",
+                table: "BranchRepositories",
+                column: "LicenseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BranchRepositories_ReadmeId",
+                table: "BranchRepositories",
+                column: "ReadmeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BranchRepositories_RepositoryId",

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CodeHub.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240323005548_InitialMigrations")]
-    partial class InitialMigrations
+    [Migration("20240325113308_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,6 +58,12 @@ namespace CodeHub.DataAccess.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GitIgnoreId");
+
+                    b.HasIndex("LicenseId");
+
+                    b.HasIndex("ReadmeId");
 
                     b.HasIndex("RepositoryId");
 
@@ -500,8 +506,20 @@ namespace CodeHub.DataAccess.Migrations
 
             modelBuilder.Entity("CodeHub.Domain.Entities.BranchRepository", b =>
                 {
-                    b.HasOne("CodeHub.Domain.Entities.Repository", "Repository")
+                    b.HasOne("CodeHub.Domain.Entities.GitIgnore", "GitIgnore")
                         .WithMany()
+                        .HasForeignKey("GitIgnoreId");
+
+                    b.HasOne("CodeHub.Domain.Entities.License", "License")
+                        .WithMany()
+                        .HasForeignKey("LicenseId");
+
+                    b.HasOne("CodeHub.Domain.Entities.Readme", "Readme")
+                        .WithMany()
+                        .HasForeignKey("ReadmeId");
+
+                    b.HasOne("CodeHub.Domain.Entities.Repository", "Repository")
+                        .WithMany("BranchRepositories")
                         .HasForeignKey("RepositoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -511,6 +529,12 @@ namespace CodeHub.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("GitIgnore");
+
+                    b.Navigation("License");
+
+                    b.Navigation("Readme");
 
                     b.Navigation("Repository");
 
@@ -524,7 +548,7 @@ namespace CodeHub.DataAccess.Migrations
                         .HasForeignKey("BranchRepositoryId");
 
                     b.HasOne("CodeHub.Domain.Entities.Repository", "Repository")
-                        .WithMany()
+                        .WithMany("Commits")
                         .HasForeignKey("RepositoryId");
 
                     b.HasOne("CodeHub.Domain.Entities.User", "User")
@@ -543,7 +567,7 @@ namespace CodeHub.DataAccess.Migrations
             modelBuilder.Entity("CodeHub.Domain.Entities.File", b =>
                 {
                     b.HasOne("CodeHub.Domain.Entities.Folder", "Folder")
-                        .WithMany()
+                        .WithMany("Files")
                         .HasForeignKey("FolderId");
 
                     b.HasOne("CodeHub.Domain.Entities.Repository", "Repository")
@@ -564,7 +588,7 @@ namespace CodeHub.DataAccess.Migrations
                         .HasForeignKey("ParentId");
 
                     b.HasOne("CodeHub.Domain.Entities.Repository", "Repository")
-                        .WithMany()
+                        .WithMany("Folders")
                         .HasForeignKey("RepositoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -577,13 +601,13 @@ namespace CodeHub.DataAccess.Migrations
             modelBuilder.Entity("CodeHub.Domain.Entities.Follow", b =>
                 {
                     b.HasOne("CodeHub.Domain.Entities.User", "Follower")
-                        .WithMany()
+                        .WithMany("Followers")
                         .HasForeignKey("FollowerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CodeHub.Domain.Entities.User", "Following")
-                        .WithMany()
+                        .WithMany("Followings")
                         .HasForeignKey("FollowingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -602,7 +626,7 @@ namespace CodeHub.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("CodeHub.Domain.Entities.Repository", "Repository")
-                        .WithMany()
+                        .WithMany("Issues")
                         .HasForeignKey("RepositoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -621,7 +645,7 @@ namespace CodeHub.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("CodeHub.Domain.Entities.Issue", "Issue")
-                        .WithMany()
+                        .WithMany("IssueAssignees")
                         .HasForeignKey("IssueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -650,7 +674,7 @@ namespace CodeHub.DataAccess.Migrations
                         .HasForeignKey("ReadmeId");
 
                     b.HasOne("CodeHub.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Repositories")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -675,7 +699,7 @@ namespace CodeHub.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("CodeHub.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Forks")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -688,7 +712,7 @@ namespace CodeHub.DataAccess.Migrations
             modelBuilder.Entity("CodeHub.Domain.Entities.RepositoryStar", b =>
                 {
                     b.HasOne("CodeHub.Domain.Entities.Repository", "Repository")
-                        .WithMany()
+                        .WithMany("Stars")
                         .HasForeignKey("RepositoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -702,6 +726,40 @@ namespace CodeHub.DataAccess.Migrations
                     b.Navigation("Repository");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CodeHub.Domain.Entities.Folder", b =>
+                {
+                    b.Navigation("Files");
+                });
+
+            modelBuilder.Entity("CodeHub.Domain.Entities.Issue", b =>
+                {
+                    b.Navigation("IssueAssignees");
+                });
+
+            modelBuilder.Entity("CodeHub.Domain.Entities.Repository", b =>
+                {
+                    b.Navigation("BranchRepositories");
+
+                    b.Navigation("Commits");
+
+                    b.Navigation("Folders");
+
+                    b.Navigation("Issues");
+
+                    b.Navigation("Stars");
+                });
+
+            modelBuilder.Entity("CodeHub.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Followers");
+
+                    b.Navigation("Followings");
+
+                    b.Navigation("Forks");
+
+                    b.Navigation("Repositories");
                 });
 #pragma warning restore 612, 618
         }

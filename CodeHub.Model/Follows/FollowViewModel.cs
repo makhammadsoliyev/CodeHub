@@ -1,10 +1,10 @@
-﻿using CodeHub.Domain.Entities;
+﻿using CodeHub.Model.Users;
 
 namespace CodeHub.Model.Follow;
 
 public class FollowViewModel
 {
     public long Id { get; set; }
-    public User Follower { get; set; }
-    public User Following { get; set; }
+    public UserViewModel Follower { get; set; }
+    public UserViewModel Following { get; set; }
 }

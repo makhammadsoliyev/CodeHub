@@ -9,7 +9,7 @@ namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class IssueAssignmentsController:ControllerBase
+public class IssueAssignmentsController : ControllerBase
 {
     private readonly IIssueAssignmentService issueAssignmentService;
 

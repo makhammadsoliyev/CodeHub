@@ -13,5 +13,5 @@ public class RepositoryUpdateModel
     public long? ReadmeId { get; set; }
     public long? GitIgnoreId { get; set; }
     public long? LicenseId { get; set; }
-    public long? ParentId { get; set; }
+    public long? ParentParentId { get; set; }
 }

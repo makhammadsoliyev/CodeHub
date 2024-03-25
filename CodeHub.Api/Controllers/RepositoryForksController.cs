@@ -1,5 +1,5 @@
 ﻿using CodeHub.Api.Models;
-using CodeHub.Model.RepositoryStar;
+using CodeHub.Model.RepositroyForks;
 using CodeHub.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,16 +9,15 @@ namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class RepositoryStarsController : ControllerBase
+public class RepositoryForksController : ControllerBase
 {
-    private readonly IRepositoryStarService repositoryStarService;
-
-    public RepositoryStarsController(IRepositoryStarService repositoryStarService)
+    private readonly IRepositoryForkService repositoryForkService;
+    public RepositoryForksController(IRepositoryForkService repositoryForkService)
     {
-        this.repositoryStarService = repositoryStarService;
+        this.repositoryForkService = repositoryForkService;
     }
 
-    // GET: api/<RepositoryStarsController>
+    // GET: api/<RepositoryForkController>
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
     {
@@ -26,11 +25,12 @@ public class RepositoryStarsController : ControllerBase
         {
             Message = "Ok",
             StatusCode = 200,
-            Data = await repositoryStarService.GetAllAsync()
+            Data = await repositoryForkService.GetAllAsync()
         });
+
     }
 
-    // GET api/<RepositoryStarsController>/5
+    // GET: api/<RepositoryForkController/Details/5>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAsync(long id)
     {
@@ -38,31 +38,31 @@ public class RepositoryStarsController : ControllerBase
         {
             Message = "Ok",
             StatusCode = 200,
-            Data = await repositoryStarService.GetByIdAsync(id)
+            Data = await repositoryForkService.GetByIdAsync(id)
         });
     }
 
-    // Post api/<RepositoryStarsController>
+    // POST api/<RepositoryForkController>
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] RepositoryStarCreateModel repositoryStar)
+    public async Task<IActionResult> PostAsync([FromBody] RepositoryForkCreateModel repositoryFork)
     {
         return Ok(new Response()
         {
             Message = "Ok",
             StatusCode = 200,
-            Data = await repositoryStarService.CreateAsync(repositoryStar)
+            Data = await repositoryForkService.CreateAsync(repositoryFork)
         });
     }
 
-    // DELETE api/<RepositoryStarsController>/5
-    [HttpPut("{id}")]
+    // DELETE api/<RepositoryForkController>/5
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(long id)
     {
         return Ok(new Response()
         {
-            Message = "Ok",
+            Message = "OK",
             StatusCode = 200,
-            Data = await repositoryStarService.DeleteAsync(id)
+            Data = await repositoryForkService.DeleteAsync(id)
         });
     }
 }

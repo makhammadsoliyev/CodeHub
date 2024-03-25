@@ -3,15 +3,17 @@ using CodeHub.Model.Follow;
 using CodeHub.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class FollowController:ControllerBase
+public class FollowsController : ControllerBase
 {
     private IFollowService followService;
 
-    public FollowController(IFollowService followService)
+    public FollowsController(IFollowService followService)
     {
         this.followService = followService;
     }

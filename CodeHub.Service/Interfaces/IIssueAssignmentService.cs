@@ -1,5 +1,4 @@
 ﻿using CodeHub.Model.IssueAssignments;
-using CodeHub.Model.Issues;
 
 namespace CodeHub.Service.Interfaces;
 

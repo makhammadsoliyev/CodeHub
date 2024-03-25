@@ -1,5 +1,4 @@
 ﻿using CodeHub.Model.Folders;
-using CodeHub.Model.GitIgnores;
 
 namespace CodeHub.Service.Interfaces;
 

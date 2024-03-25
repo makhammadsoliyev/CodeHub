@@ -1,5 +1,4 @@
 ﻿using CodeHub.Model.GitIgnores;
-using CodeHub.Model.Users;
 
 namespace CodeHub.Service.Interfaces;
 

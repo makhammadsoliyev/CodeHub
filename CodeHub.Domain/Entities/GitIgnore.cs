@@ -2,8 +2,8 @@
 
 namespace CodeHub.Domain.Entities;
 
-public class GitIgnore:Auditable
+public class GitIgnore : Auditable
 {
-    public string Name {  get; set; }
+    public string Name { get; set; }
     public string Content { get; set; }
 }

@@ -9,4 +9,6 @@ public class Folder : Auditable
     public Folder Parent { get; set; }
     public long RepositoryId { get; set; }
     public Repository Repository { get; set; }
+
+    public IEnumerable<File> Files { get; set; }
 }

@@ -24,7 +24,7 @@ public class GitIgnoreService : IGitIgnoreService
     {
         var gitIgnores = repository.SelectAsQueryable().FirstOrDefault(g => g.Name.ToLower() == gitIgnore.Name.ToLower());
 
-        if (gitIgnores == null)
+        if (gitIgnores is not null)
             throw new CustomException(409, "GitIgnore is already exist");
 
         var createdGitIgnore = await repository.InsertAsync(mapper.Map<GitIgnore>(gitIgnore));

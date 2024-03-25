@@ -45,7 +45,7 @@ public class LicenseService : ILicenseService
 
     public async Task<IEnumerable<LicenseViewModel>> GetAllAsync()
     {
-        var licenses = await repository.SelectAsQueryable().ToListAsync(); 
+        var licenses = await repository.SelectAsQueryable().ToListAsync();
         return mapper.Map<IEnumerable<LicenseViewModel>>(licenses);
     }
 

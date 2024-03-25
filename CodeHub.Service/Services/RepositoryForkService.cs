@@ -11,10 +11,17 @@ namespace CodeHub.Service.Services;
 public class RepositoryForkService : IRepositoryForkService
 {
     private IMapper mapper;
-    private IRepositoryService repositoryService;
     private IUserService userService;
+    private IRepositoryService repositoryService;
     private IGenericRepository<RepositoryFork> Repository;
 
+    public RepositoryForkService(IGenericRepository<RepositoryFork> repository, IUserService userService, IRepositoryService repositoryService, IMapper mapper)
+    {
+        this.mapper = mapper;
+        Repository = repository;
+        this.userService = userService;
+        this.repositoryService = repositoryService;
+    }
 
     public async Task<RepositoryForkViewModel> CreateAsync(RepositoryForkCreateModel fork)
     {
