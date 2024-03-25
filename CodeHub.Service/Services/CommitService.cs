@@ -13,10 +13,10 @@ public class CommitService : ICommitService
     private IGenericRepository<Commit> Repository;
     private IUserService userService;
     private IRepositoryService repositoryService;
-    private Mapper mapper;
+    private IMapper mapper;
 
 
-    public CommitService(IGenericRepository<Commit> Repository, Mapper mapper, IUserService userService, IRepositoryService repositoryService)
+    public CommitService(IGenericRepository<Commit> Repository, IMapper mapper, IUserService userService, IRepositoryService repositoryService)
     {
         this.Repository = Repository;
         this.mapper = mapper;
