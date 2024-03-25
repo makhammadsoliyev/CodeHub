@@ -14,5 +14,5 @@ public class RepositoryViewModel
     public Readme Readme { get; set; }
     public GitIgnore GitIgnore { get; set; }
     public License License { get; set; }
-    public Repository Parent { get; set; }
+    public Repository ParentRepository { get; set; }
 }
