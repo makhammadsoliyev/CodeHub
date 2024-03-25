@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CodeHub.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240323005548_InitialMigrations")]
+    [Migration("20240325105653_InitialMigrations")]
     partial class InitialMigrations
     {
         /// <inheritdoc />
@@ -58,6 +58,12 @@ namespace CodeHub.DataAccess.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GitIgnoreId");
+
+                    b.HasIndex("LicenseId");
+
+                    b.HasIndex("ReadmeId");
 
                     b.HasIndex("RepositoryId");
 
@@ -500,6 +506,18 @@ namespace CodeHub.DataAccess.Migrations
 
             modelBuilder.Entity("CodeHub.Domain.Entities.BranchRepository", b =>
                 {
+                    b.HasOne("CodeHub.Domain.Entities.GitIgnore", "GitIgnore")
+                        .WithMany()
+                        .HasForeignKey("GitIgnoreId");
+
+                    b.HasOne("CodeHub.Domain.Entities.License", "License")
+                        .WithMany()
+                        .HasForeignKey("LicenseId");
+
+                    b.HasOne("CodeHub.Domain.Entities.Readme", "Readme")
+                        .WithMany()
+                        .HasForeignKey("ReadmeId");
+
                     b.HasOne("CodeHub.Domain.Entities.Repository", "Repository")
                         .WithMany()
                         .HasForeignKey("RepositoryId")
@@ -511,6 +529,12 @@ namespace CodeHub.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("GitIgnore");
+
+                    b.Navigation("License");
+
+                    b.Navigation("Readme");
 
                     b.Navigation("Repository");
 

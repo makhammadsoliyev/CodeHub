@@ -56,6 +56,12 @@ namespace CodeHub.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GitIgnoreId");
+
+                    b.HasIndex("LicenseId");
+
+                    b.HasIndex("ReadmeId");
+
                     b.HasIndex("RepositoryId");
 
                     b.HasIndex("UserId");
@@ -497,6 +503,18 @@ namespace CodeHub.DataAccess.Migrations
 
             modelBuilder.Entity("CodeHub.Domain.Entities.BranchRepository", b =>
                 {
+                    b.HasOne("CodeHub.Domain.Entities.GitIgnore", "GitIgnore")
+                        .WithMany()
+                        .HasForeignKey("GitIgnoreId");
+
+                    b.HasOne("CodeHub.Domain.Entities.License", "License")
+                        .WithMany()
+                        .HasForeignKey("LicenseId");
+
+                    b.HasOne("CodeHub.Domain.Entities.Readme", "Readme")
+                        .WithMany()
+                        .HasForeignKey("ReadmeId");
+
                     b.HasOne("CodeHub.Domain.Entities.Repository", "Repository")
                         .WithMany()
                         .HasForeignKey("RepositoryId")
@@ -508,6 +526,12 @@ namespace CodeHub.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("GitIgnore");
+
+                    b.Navigation("License");
+
+                    b.Navigation("Readme");
 
                     b.Navigation("Repository");
 
