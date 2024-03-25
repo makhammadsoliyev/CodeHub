@@ -35,7 +35,7 @@ public class BranchRepositoryService : IBranchRepositoryService
             .Where(br => br.RepositoryId == branchRepository.RepositoryId)
             .FirstOrDefault(br => br.BranchName == branchRepository.BranchName);
 
-        if (existUser is not null)
+        if (existBranchRepository is not null)
             throw new CustomException(409, "Branch is already exists with this name");
 
         var createdBranchRepository = await Repository.InsertAsync(mapper.Map<BranchRepository>(branchRepository));
