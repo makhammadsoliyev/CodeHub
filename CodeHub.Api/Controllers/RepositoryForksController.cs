@@ -1,18 +1,18 @@
 ﻿using CodeHub.Api.Models;
-using CodeHub.Model.Commits;
 using CodeHub.Model.RepositroyForks;
 using CodeHub.Service.Interfaces;
-using CodeHub.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CodeHub.Api.Controllers;
 
-public class RepositoryForkController:ControllerBase
+[Route("api/[controller]")]
+[ApiController]
+public class RepositoryForksController : ControllerBase
 {
     private readonly IRepositoryForkService repositoryForkService;
-    public RepositoryForkController(IRepositoryForkService repositoryForkService)
+    public RepositoryForksController(IRepositoryForkService repositoryForkService)
     {
         this.repositoryForkService = repositoryForkService;
     }

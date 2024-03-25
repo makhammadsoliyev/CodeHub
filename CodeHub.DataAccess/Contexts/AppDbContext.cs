@@ -45,7 +45,7 @@ public class AppDbContext : DbContext
              .HasOne(repository => repository.Readme)
              .WithMany()
              .HasForeignKey(repository => repository.ReadmeId);
-        
+
         modelBuilder.Entity<Repository>()
             .HasOne(repository => repository.License)
             .WithMany()
@@ -170,7 +170,7 @@ public class AppDbContext : DbContext
            .WithMany()
            .HasForeignKey(folder => folder.ParentId);
 
-        
+
         // File
         modelBuilder.Entity<File>()
             .HasOne(file => file.Repository)

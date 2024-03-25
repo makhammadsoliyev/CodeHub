@@ -23,7 +23,7 @@ public class ReadmeService : IReadmeService
     {
         var createdReadme = await repository.InsertAsync(mapper.Map<Readme>(readme));
         await repository.SaveAsync();
-        
+
         return mapper.Map<ReadmeViewModel>(createdReadme);
     }
 
@@ -57,7 +57,7 @@ public class ReadmeService : IReadmeService
         var existReadme = await repository.SelectByIdAsync(id)
             ?? throw new CustomException(404, "Readme file not found");
 
-        var mappedReadme = mapper.Map(readme,existReadme);
+        var mappedReadme = mapper.Map(readme, existReadme);
         var updatedReadme = await repository.UpdateAsync(mappedReadme);
         await repository.SaveAsync();
 

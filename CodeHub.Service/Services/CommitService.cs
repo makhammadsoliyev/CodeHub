@@ -28,7 +28,7 @@ public class CommitService : ICommitService
     public async Task<CommitViewModel> CreateAsync(CommitCreateModel commit)
     {
         var existUser = await userService.GetByIdAsync(commit.UserId);
-        var existRepository = await repositoryService.GetByIdAsync(commit.RepositoryId);
+        var existRepository = await repositoryService.GetByIdAsync(commit.RepositoryId ?? 0);
 
         var createdCommit = await Repository.InsertAsync(mapper.Map<Commit>(commit));
         await Repository.SaveAsync();

@@ -13,7 +13,7 @@ public class FolderService : IFolderService
     private readonly IMapper mapper;
     private readonly IGenericRepository<Folder> repository;
 
-    public FolderService(IMapper mapper , IGenericRepository<Folder> repository)
+    public FolderService(IMapper mapper, IGenericRepository<Folder> repository)
     {
         this.mapper = mapper;
         this.repository = repository;
@@ -57,7 +57,7 @@ public class FolderService : IFolderService
         var existFolder = await repository.SelectByIdAsync(id)
             ?? throw new CustomException(404, "Folder not found");
 
-        var mappedFolder = mapper.Map(folder,existFolder);
+        var mappedFolder = mapper.Map(folder, existFolder);
         var updateFolder = await repository.UpdateAsync(mappedFolder);
 
         return mapper.Map<FolderViewModel>(updateFolder);

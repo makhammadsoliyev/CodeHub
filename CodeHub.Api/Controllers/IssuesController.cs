@@ -9,7 +9,6 @@ namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-
 public class IssuesController : ControllerBase
 {
     private IIssueService issueService;
