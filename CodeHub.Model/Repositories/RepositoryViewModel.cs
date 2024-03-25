@@ -1,5 +1,9 @@
-﻿using CodeHub.Domain.Entities;
-using CodeHub.Domain.Enums;
+﻿using CodeHub.Domain.Enums;
+using CodeHub.Model.BranchRepositories;
+using CodeHub.Model.GitIgnores;
+using CodeHub.Model.Issues;
+using CodeHub.Model.Licenses;
+using CodeHub.Model.Readmes;
 
 namespace CodeHub.Model.Repositories;
 
@@ -11,8 +15,11 @@ public class RepositoryViewModel
     public string BranchName { get; set; }
     public long UserId { get; set; }
     public RepositoryVisibility Visibility { get; set; }
-    public Readme Readme { get; set; }
-    public GitIgnore GitIgnore { get; set; }
-    public License License { get; set; }
-    public Repository Parent { get; set; }
+    public ReadmeViewModel Readme { get; set; }
+    public GitIgnoreViewModel GitIgnore { get; set; }
+    public LicenseViewModel License { get; set; }
+    public RepositoryViewModel Parent { get; set; }
+
+    public IEnumerable<BranchRepositoryViewModel> BranchRepositories { get; set; }
+    public IEnumerable<IssueViewModel> Issues { get; set; }
 }

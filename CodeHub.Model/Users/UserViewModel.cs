@@ -1,4 +1,6 @@
-﻿namespace CodeHub.Model.Users;
+﻿using CodeHub.Model.Repositories;
+
+namespace CodeHub.Model.Users;
 
 public class UserViewModel
 {
@@ -8,4 +10,6 @@ public class UserViewModel
     public string UserName { get; set; }
     public string Email { get; set; }
     public string AvatarUrl { get; set; }
+
+    public IEnumerable<RepositoryViewModel> Repositories { get; set; }
 }
