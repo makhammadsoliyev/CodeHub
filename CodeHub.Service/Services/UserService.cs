@@ -4,7 +4,6 @@ using CodeHub.Domain.Entities;
 using CodeHub.Model.Users;
 using CodeHub.Service.Exceptions;
 using CodeHub.Service.Interfaces;
-using CodeHub.Service.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeHub.Service.Services;

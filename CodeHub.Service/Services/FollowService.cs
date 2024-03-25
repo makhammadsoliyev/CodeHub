@@ -60,7 +60,7 @@ public class FollowService : IFollowService
         var follows = await repository
             .SelectAsQueryable(new string[] { "Follower", "Following" }).ToListAsync();
 
-        return mapper.Map<IEnumerable<FollowViewModel>>(follows);   
+        return mapper.Map<IEnumerable<FollowViewModel>>(follows);
     }
 
 

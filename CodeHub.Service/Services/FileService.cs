@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using CodeHub.DataAccess.Repositories;
-using CodeHub.Domain.Entities;
 using CodeHub.Model.Files;
 using CodeHub.Service.Exceptions;
 using CodeHub.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Security.AccessControl;
 using File = CodeHub.Domain.Entities.File;
 
 namespace CodeHub.Service.Services;
@@ -14,7 +12,7 @@ public class FileService : IFileService
 {
     private readonly IMapper mapper;
     private readonly IGenericRepository<File> repository;
-    public FileService(IGenericRepository<File> repository ,IMapper mapper)
+    public FileService(IGenericRepository<File> repository, IMapper mapper)
     {
         this.repository = repository;
         this.mapper = mapper;
@@ -58,7 +56,7 @@ public class FileService : IFileService
         var existFile = await repository.SelectByIdAsync(id)
             ?? throw new CustomException(404, "File not found");
 
-        var mappedFile = mapper.Map(file,existFile);
+        var mappedFile = mapper.Map(file, existFile);
         var updateFile = await repository.UpdateAsync(mappedFile);
 
         return mapper.Map<FileViewModel>(updateFile);

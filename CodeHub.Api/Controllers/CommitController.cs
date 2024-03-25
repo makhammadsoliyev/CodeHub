@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CodeHub.Api.Controllers;
 
-public class CommitController:ControllerBase
+[Route("api/[controller]")]
+[ApiController]
+public class CommitController : ControllerBase
 {
     private readonly ICommitService commitService;
     public CommitController(ICommitService commitService)

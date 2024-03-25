@@ -6,6 +6,7 @@ namespace CodeHub.Model.Commits;
 
 public class CommitViewModel
 {
+    public long Id { get; set; }
     public UserViewModel User { get; set; }
     public RepositoryViewModel Repository { get; set; }
     public BranchRepositoryViewModel BranchRepository { get; set; }

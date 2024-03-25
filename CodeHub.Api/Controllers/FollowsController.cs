@@ -9,11 +9,11 @@ namespace CodeHub.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class FollowController:ControllerBase
+public class FollowsController : ControllerBase
 {
     private IFollowService followService;
 
-    public FollowController(IFollowService followService)
+    public FollowsController(IFollowService followService)
     {
         this.followService = followService;
     }

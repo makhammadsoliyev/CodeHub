@@ -1,5 +1,4 @@
 ﻿using CodeHub.Model.Files;
-using CodeHub.Model.Folders;
 
 namespace CodeHub.Service.Interfaces;
 
