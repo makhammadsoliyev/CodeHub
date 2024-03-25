@@ -12,4 +12,6 @@ public class Issue : Auditable
     public Repository Repository { get; set; }
     public long CreatorId { get; set; }
     public User Creator { get; set; }
+
+    public IEnumerable<IssueAssignment> Assignees { get; set; }
 }

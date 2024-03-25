@@ -20,6 +20,10 @@ public class Repository : Auditable
     public License License { get; set; }
     public long? ParentRepositoryId { get; set; }
     public Repository ParentRepository { get; set; }
-    public IEnumerable<BranchRepository> BranchRepositories { get; set; }
+
     public IEnumerable<Issue> Issues { get; set; }
+    public IEnumerable<Folder> Folders { get; set; }
+    public IEnumerable<Commit> Commits { get; set; }
+    public IEnumerable<RepositoryStar> Stars { get; set; }
+    public IEnumerable<BranchRepository> BranchRepositories { get; set; }
 }

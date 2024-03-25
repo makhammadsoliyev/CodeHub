@@ -10,5 +10,8 @@ public class User : Auditable
     public string Email { get; set; }
     public string Password { get; set; }
     public string AvatarUrl { get; set; }
+
     public IEnumerable<Repository> Repositories { get; set; }
+    public IEnumerable<RepositoryFork> Forks { get; set; }
+    public IEnumerable<Follow> Follows { get; set; }
 }
