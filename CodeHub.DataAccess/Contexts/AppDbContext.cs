@@ -159,6 +159,7 @@ public class AppDbContext : DbContext
            .WithMany(user => user.Followers)
            .HasForeignKey(follow => follow.FollowerId);
 
+
         // Folder
         modelBuilder.Entity<Folder>()
             .HasOne(folder => folder.Repository)
@@ -182,6 +183,89 @@ public class AppDbContext : DbContext
            .WithMany(folder => folder.Files)
            .HasForeignKey(file => file.FolderId);
 
+
+        //Seed data GitIgnore
+        modelBuilder.Entity<GitIgnore>().HasData(
+            new GitIgnore() { Id = 1, Name = "gitignore", Content = "Content", CreatedAt = DateTime.UtcNow }
+            );
+
+
+        //Seed data Readme
+        modelBuilder.Entity<Readme>().HasData(
+            new Readme() { Id = 1, Name = "Readme", Content = "Content", CreatedAt = DateTime.UtcNow }
+            );
+
+
+        //Seed data License
+        modelBuilder.Entity<License>().HasData(
+            new License() { Id = 1, Name = "MIT", Content = "Content", CreatedAt = DateTime.UtcNow}
+            );
+
+
+        //Seed data User
+        modelBuilder.Entity<User>().HasData(
+            new User() { Id = 1, FirstName = "Umidjon", LastName = "Makhammadsoliyev", Email =  "umidjon@gmail.com", Password = "1234", CreatedAt = DateTime.UtcNow }
+            );
+
+
+        //Seed data Repository
+        modelBuilder.Entity<Repository>().HasData(
+            new Repository() { Id = 1, Name = "CodeHub", UserId = 1, CloneUrl = "https://github.com/makhammadsoliyev/CodeHub.git" ,Visibility = Domain.Enums.RepositoryVisibility.Public 
+            ,BranchName = "main" ,GitIgnoreId = 1 ,LicenseId = 1 ,ReadmeId =1 ,ParentRepositoryId = null ,CreatedAt = DateTime.UtcNow }
+            );
+
+
+        //Seed data BranchRepository
+        modelBuilder.Entity<BranchRepository>().HasData(
+            new BranchRepository { Id = 1, BranchName = "BranchName", GitIgnoreId = 1, RepositoryId = 1, LicenseId = 1, ReadmeId = 1, CreatedAt =DateTime.UtcNow }
+            );
+
+
+        //Seed data Commit
+        modelBuilder.Entity<Commit>().HasData(
+            new Commit { Id = 1, RepositoryId = 1, UserId = 1, Message = "Message", CreatedAt = DateTime.UtcNow, BranchRepositoryId = null }
+            );
+
+
+        //Seed data Issue
+        modelBuilder.Entity<Issue>().HasData(
+            new Issue { Id = 1, Title = "Issue", CreatorId = 1, Status = Domain.Enums.IssueStatus.Open, RepositoryId = 1, CreatedAt = DateTime.UtcNow}
+            );
+
+
+        //Seed data RepositoryFork
+        modelBuilder.Entity<RepositoryFork>().HasData(
+            new RepositoryFork { Id = 1, UserId = 1, RepositoryId = 1, CreatedAt = DateTime.UtcNow }
+            );
+
+
+        //Seed data RepositoryStar
+        modelBuilder.Entity<RepositoryStar>().HasData(
+            new RepositoryStar { Id = 1, RepositoryId = 1, UserId = 1, CreatedAt = DateTime.UtcNow }
+            );
+
+
+        //Seed data Folder
+        modelBuilder.Entity<Folder>().HasData(
+            new Folder { Id = 1, Name = "Folder", ParentId = null, RepositoryId = 1, CreatedAt = DateTime.UtcNow }
+            );
+
+
+        //Seed data File
+        modelBuilder.Entity<File>().HasData(
+            new File { Id = 1, Name = "File", Extension = "cs", FolderId = 1, RepositoryId = 1, Content = "Code", CreatedAt = DateTime.UtcNow }
+            );
+
+        //Seed data IssueAssignment
+        modelBuilder.Entity<IssueAssignment>().HasData(
+            new IssueAssignment { Id = 1, AssigneesId = 1, IssueId = 1, CreatedAt = DateTime.UtcNow }
+            );
+
+
+        //Seed data Follow
+        modelBuilder.Entity<Follow>().HasData(
+            new Follow { Id = 1, FollowerId = 1, FollowingId = 2, CreatedAt = DateTime.UtcNow }
+            );
     }
     public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
