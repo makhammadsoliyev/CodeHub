@@ -1,4 +1,5 @@
 ﻿using CodeHub.Domain.Enums;
+using CodeHub.Model.IssueAssignments;
 using CodeHub.Model.Repositories;
 using CodeHub.Model.Users;
 
@@ -12,4 +13,6 @@ public class IssueViewModel
     public string Description { get; set; }
     public IssueStatus Status { get; set; }
     public UserViewModel User { get; set; }
+
+    public IEnumerable<IssueAssignmentViewModel> IssueAssignees { get; set; }
 }
